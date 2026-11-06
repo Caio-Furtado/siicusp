@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semidiscrete models for gravitational fingering in the TFE regime</title>
+<meta name="description" content="Companion page to the poster presented at the 34th SIICUSP: semidiscrete two-tube model for gravitational fingering in the TFE regime, propagating terraces and the complete proof of the main result.">
+<link rel="alternate" hreflang="pt-BR" href="https://caio-furtado.github.io/siicusp/">
+<link rel="alternate" hreflang="en" href="https://caio-furtado.github.io/siicusp/en.html">
+<link rel="alternate" hreflang="x-default" href="https://caio-furtado.github.io/siicusp/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+:root{
+  --navy:#16325c; --navy2:#1f4a86; --navy-soft:#e8eef7; --navy-line:#c9d6e8;
+  --gold:#e0a93a; --gold-dark:#a87a1e; --gold-soft:#fbf3df;
+  --ink:#1c2430; --muted:#5b6673; --paper:#fbfaf7; --rule:#e2e0d9;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans:"Source Sans 3", "Segoe UI", Helvetica, Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:16px}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--serif); font-size:17.5px; line-height:1.6}
+a{color:var(--navy2)}
+a:hover{color:var(--gold-dark)}
+
+/* ---------- cabeçalho ---------- */
+.hero{background:linear-gradient(160deg,#122a4f 0%, #16325c 60%, #1d4079 100%); color:#fff; padding:44px 24px 34px; border-bottom:6px solid var(--gold)}
+.hero-inner{max-width:1040px; margin:0 auto}
+.hero .kicker{font-family:var(--sans); text-transform:uppercase; letter-spacing:.14em; font-size:.8rem; color:#f1d48c; margin:0 0 10px}
+.hero h1{font-family:var(--serif); font-weight:600; font-size:clamp(1.7rem,3.6vw,2.7rem); line-height:1.18; margin:0 0 16px; letter-spacing:-.01em}
+.hero .authors{font-family:var(--sans); font-size:1.08rem; margin:0; color:#eef2f8}
+.hero .authors b{font-weight:600; color:#fff}
+.hero .authors span{color:#c9d6e8}
+.hero .meta{font-family:var(--sans); font-size:.92rem; color:#b9c7dd; margin:14px 0 0}
+.hero .meta a{color:#f1d48c}
+
+/* ---------- layout ---------- */
+.layout{max-width:1040px; margin:0 auto; display:grid; grid-template-columns:230px minmax(0,1fr); gap:44px; padding:0 24px}
+nav.toc{position:sticky; top:0; align-self:start; padding:28px 0 28px; max-height:100vh; overflow:auto; font-family:var(--sans)}
+nav.toc .toc-title{font-size:.78rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); margin:0 0 10px}
+nav.toc ol{list-style:none; margin:0; padding:0; border-left:2px solid var(--rule)}
+nav.toc li a{display:block; padding:5px 12px; color:var(--muted); text-decoration:none; font-size:.93rem; line-height:1.3; border-left:2px solid transparent; margin-left:-2px}
+nav.toc li a:hover{color:var(--navy)}
+nav.toc li a.active{color:var(--navy); border-left-color:var(--gold); font-weight:600}
+nav.toc .num{display:inline-block; width:1.5em; color:var(--gold-dark); font-weight:600}
+main{padding:10px 0 60px; min-width:0}
+details.toc-mobile{display:none}
+@media (max-width:900px){
+  .layout{display:block; padding:0 16px}
+  nav.toc{display:none}
+  details.toc-mobile{display:block; font-family:var(--sans); margin:22px 0 0; border:1px solid var(--rule); border-radius:8px; padding:8px 14px; background:#fff}
+  details.toc-mobile summary{cursor:pointer; font-weight:600; color:var(--navy)}
+  details.toc-mobile ol{margin:8px 0 4px; padding-left:22px}
+  details.toc-mobile a{text-decoration:none}
+  body{font-size:16.5px}
+  .katex{font-size:1em}
+  .eqbox{padding:6px 8px}
+  .katex-display .katex{font-size:.98em}
+}
+
+/* ---------- tipografia ---------- */
+section{margin-top:44px}
+h2{font-family:var(--sans); color:var(--navy); font-size:1.6rem; font-weight:700; margin:0 0 14px; padding-bottom:6px; border-bottom:3px solid var(--gold); letter-spacing:-.01em}
+h2 .num{color:var(--gold-dark); margin-right:.4em}
+h3{font-family:var(--sans); color:var(--navy); font-size:1.18rem; font-weight:700; margin:28px 0 8px}
+h4{font-family:var(--sans); color:var(--navy2); font-size:1.02rem; font-weight:700; margin:22px 0 6px; text-transform:none}
+p{margin:0 0 14px}
+ul.plain{margin:0 0 14px; padding-left:1.4em}
+ul.plain li{margin-bottom:6px}
+.lead{font-size:1.05em}
+.small{font-size:.9em; color:var(--muted)}
+em.term{font-style:italic; color:var(--navy)}
+.katex-display{margin:14px 0; overflow-x:auto; overflow-y:hidden; padding:2px 0}
+.katex{font-size:1.06em}
+
+/* ---------- ambientes (teorema, definição...) ---------- */
+.env{border-left:5px solid var(--navy); background:var(--navy-soft); padding:14px 18px 6px; margin:18px 0 20px; border-radius:0 8px 8px 0}
+.env .env-title{font-family:var(--sans); font-weight:700; color:var(--navy); margin:0 0 6px; font-size:1.02rem}
+.env .env-title .sub{font-weight:400; color:var(--muted)}
+.env.def{border-left-color:var(--gold); background:var(--gold-soft)}
+.env.def .env-title{color:var(--gold-dark)}
+.env.lema{border-left-color:var(--navy2); background:#f0f4fa}
+.env.obs{border-left-color:#9aa5b1; background:#f3f4f6}
+.env.obs .env-title{color:#4c5762}
+.env.teorema{border:2px solid var(--navy); border-left-width:5px; background:#e6edf8}
+.env p:last-child{margin-bottom:10px}
+.proof{margin:10px 0 22px}
+.proof > p:first-child::before, .proof-label{font-style:italic; font-weight:600; color:var(--navy)}
+.proof-label{font-family:var(--serif)}
+.qed{float:right; color:var(--navy); font-size:1.1em; margin-left:10px}
+.qed::after{content:"\25A1"}
+.clear{clear:both}
+details.knowl{margin:8px 0 16px; border:1px dashed var(--navy-line); border-radius:8px; padding:6px 14px; background:#fff}
+details.knowl summary{cursor:pointer; font-family:var(--sans); color:var(--navy2); font-weight:600}
+details.knowl[open] summary{margin-bottom:6px}
+
+/* ---------- caixas de equação (como no pôster) ---------- */
+.eqbox{border:2px solid var(--navy); background:var(--navy-soft); border-radius:6px; padding:8px 14px; margin:16px 0}
+.eqbox .katex-display{margin:8px 0}
+.eqrow{display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; column-gap:12px}
+.eqrow .eq{min-width:0}
+.eqlabel{font-family:var(--serif); font-weight:600; color:var(--navy); font-size:1.05em; white-space:nowrap}
+.eqrow.plain{margin:6px 0}
+
+/* ---------- figuras ---------- */
+figure{margin:22px 0 26px; text-align:center}
+figure svg{max-width:100%; height:auto; display:block; margin:0 auto}
+figcaption{font-family:var(--sans); font-size:.9rem; color:var(--muted); margin-top:8px; text-align:left; line-height:1.45; max-width:640px; margin-left:auto; margin-right:auto}
+figcaption b{color:var(--navy)}
+.figrow{display:flex; flex-wrap:wrap; gap:18px; justify-content:center; align-items:flex-start}
+.figrow > *{flex:1 1 280px}
+svg text{font-family:var(--sans)}
+svg .it{font-family:"Source Serif 4", Georgia, serif; font-style:italic}
+
+/* ---------- animação ---------- */
+.anim{background:#fff; border:1px solid var(--rule); border-radius:10px; padding:14px 14px 10px; margin:16px 0 24px}
+.anim canvas{width:100%; height:auto; display:block}
+.controls{display:flex; flex-wrap:wrap; gap:8px 14px; align-items:center; font-family:var(--sans); font-size:.92rem; margin-top:10px}
+.controls button{font-family:var(--sans); font-size:.92rem; padding:6px 12px; border-radius:6px; border:1px solid var(--navy); background:var(--navy); color:#fff; cursor:pointer}
+.controls button.secondary{background:#fff; color:var(--navy)}
+.controls button:hover{filter:brightness(1.08)}
+.controls select{font-family:var(--sans); font-size:.9rem; padding:4px 6px; border-radius:6px; border:1px solid var(--navy-line)}
+.controls .readout{margin-left:auto; color:var(--muted); font-variant-numeric:tabular-nums}
+.readout b{color:var(--navy)}
+
+/* ---------- tabela comparativa ---------- */
+table.cmp{width:100%; border-collapse:collapse; font-family:var(--sans); font-size:.95rem; margin:14px 0 10px; background:#fff}
+table.cmp th, table.cmp td{border:1px solid var(--navy-line); padding:8px 10px; text-align:left; vertical-align:middle}
+table.cmp th{background:var(--navy); color:#fff; font-weight:600}
+table.cmp tr.hl td{background:var(--gold-soft); font-weight:600}
+table.cmp td .katex{font-size:1em}
+@media (max-width:640px){ table.cmp{display:block; overflow-x:auto} }
+
+/* ---------- referência e rodapé ---------- */
+.ref{padding-left:2.2em; text-indent:-2.2em}
+footer{border-top:1px solid var(--rule); margin-top:40px; padding:22px 24px 40px; font-family:var(--sans); font-size:.88rem; color:var(--muted)}
+footer .inner{max-width:1040px; margin:0 auto}
+.tag{display:inline-block; font-family:var(--sans); font-size:.75rem; letter-spacing:.06em; text-transform:uppercase; background:var(--gold-soft); color:var(--gold-dark); border-radius:4px; padding:1px 7px; vertical-align:middle}
+
+
+/* ---------- cartão do pôster ---------- */
+.poster-card{display:grid; grid-template-columns:minmax(180px,260px) 1fr; gap:26px; align-items:center; background:#fff; border:1px solid var(--rule); border-radius:12px; padding:20px 22px; margin:28px 0 8px; box-shadow:0 2px 10px rgba(22,50,92,.06)}
+.poster-card .thumb{display:block; border:1px solid var(--navy-line); border-radius:6px; overflow:hidden; box-shadow:0 6px 18px rgba(22,50,92,.18); transition:transform .15s ease, box-shadow .15s ease}
+.poster-card .thumb:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(22,50,92,.25)}
+.poster-card .thumb img{display:block; width:100%; height:auto}
+.poster-card h2{border:none; margin:0 0 6px; padding:0; font-size:1.25rem}
+.poster-card p{margin:0 0 12px; color:var(--muted); font-size:.98em}
+.btns{display:flex; flex-wrap:wrap; gap:10px}
+.btn{display:inline-block; font-family:var(--sans); font-weight:600; font-size:.95rem; padding:9px 15px; border-radius:8px; text-decoration:none; border:1.5px solid var(--navy); background:var(--navy); color:#fff; line-height:1.2}
+.btn:hover{background:var(--navy2); border-color:var(--navy2); color:#fff}
+.btn.secondary{background:#fff; color:var(--navy)}
+.btn.secondary:hover{background:var(--navy-soft); color:var(--navy)}
+.btn.gold{background:var(--gold); border-color:var(--gold); color:#1c2430}
+.btn.gold:hover{background:#d39a2a; border-color:#d39a2a; color:#1c2430}
+.btn svg{width:15px; height:15px; vertical-align:-2px; margin-right:6px}
+@media (max-width:900px){
+  .poster-card{grid-template-columns:1fr; gap:16px}
+  .poster-card .thumb{max-width:240px; margin:0 auto}
+}
+/* ---------- vídeo da motivação ---------- */
+.videofig{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:14px; align-items:stretch; justify-content:center; max-width:560px; margin:0 auto}
+.videofig video{width:100%; height:auto; display:block; border:2px solid var(--navy); border-radius:6px; background:var(--navy)}
+.videofig .labels{display:flex; flex-direction:column; justify-content:space-between; font-family:var(--sans); font-size:.85rem; font-weight:600; color:var(--navy); text-align:left; padding:6px 0}
+.videofig .labels .mid{color:var(--gold-dark)}
+.videofig .labels .low{color:var(--gold-dark)}
+
+/* ---------- animação SVG da motivação ---------- */
+@keyframes growDown{0%{transform:scaleY(0)} 78%{transform:scaleY(1)} 100%{transform:scaleY(1)}}
+@keyframes growUp{0%{transform:scaleY(0)} 78%{transform:scaleY(1)} 100%{transform:scaleY(1)}}
+@keyframes lineUp{0%{transform:translateY(0)} 78%{transform:translateY(-78px)} 100%{transform:translateY(-78px)}}
+@keyframes lineDown{0%{transform:translateY(0)} 78%{transform:translateY(78px)} 100%{transform:translateY(78px)}}
+@keyframes fadeIn{0%,55%{opacity:0} 75%,100%{opacity:1}}
+.fingerDown{transform-box:fill-box; transform-origin:top center; animation:growDown 10s linear infinite}
+.fingerUp{transform-box:fill-box; transform-origin:bottom center; animation:growUp 10s linear infinite}
+.lineUp{animation:lineUp 10s linear infinite}
+.lineDown{animation:lineDown 10s linear infinite}
+.lateLabel{animation:fadeIn 10s linear infinite}
+@media (prefers-reduced-motion:reduce){
+  .fingerDown,.fingerUp,.lineUp,.lineDown,.lateLabel{animation:none}
+  .fingerDown,.fingerUp{transform:scaleY(1)} .lineUp{transform:translateY(-78px)} .lineDown{transform:translateY(78px)}
+}
+
+/* ---------- seletor de idioma / language switch ---------- */
+.hero-inner{position:relative}
+.lang-switch{position:absolute; top:-6px; right:0; display:inline-flex; border:1.5px solid rgba(255,255,255,.55); border-radius:999px; overflow:hidden; font-family:var(--sans); font-size:.8rem; font-weight:600; letter-spacing:.08em}
+.lang-switch a{color:#fff; text-decoration:none; padding:5px 13px; line-height:1.2}
+.lang-switch a.active{background:var(--gold); color:#1c2430}
+.lang-switch a:not(.active):hover{background:rgba(255,255,255,.16); color:#fff}
+nav.toc .toc-lang{margin:16px 0 0; padding-left:12px; font-size:.88rem}
+nav.toc .toc-lang a{color:var(--muted); text-decoration:none}
+nav.toc .toc-lang a:hover{color:var(--navy)}
+@media (max-width:900px){
+  .lang-switch{position:static; display:flex; width:max-content; margin:0 0 16px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="lang-switch" aria-label="Idioma / Language">
+      <a href="index.html" hreflang="pt-BR" lang="pt-BR" data-lang="pt" title="Versão em português">PT-BR</a>
+      <a href="en.html" hreflang="en" lang="en" data-lang="en" class="active" aria-current="page">EN</a>
+    </div>
+    <p class="kicker">34th SIICUSP · Undergraduate Research · IME-USP</p>
+    <h1>Semidiscrete models for gravitational fingering in the TFE regime</h1>
+    <p class="authors"><b>Caio Alexandre Paoli Furtado</b> <span>·</span> caiofurtado@usp.br<br>
+      <span>Advisor:</span> <b>Prof. Dr. Iuliia Petrova</b></p>
+    <p class="meta">Companion page to the poster presented at the 34th International Symposium of Undergraduate Research of the University of São Paulo (SIICUSP). It gathers the content of the poster together with additional figures, an animation of the propagating terrace and the complete proof of the main result.</p>
+  </div>
+</header>
+
+<div class="layout">
+<nav class="toc" aria-label="Contents">
+  <p class="toc-title">Contents</p>
+  <ol>
+    <li><a href="#poster"><span class="num">&#9670;</span>The poster</a></li>
+    <li><a href="#motivation"><span class="num">1</span>Motivation</a></li>
+    <li><a href="#semidiscretization"><span class="num">2</span>The idea of semidiscretization</a></li>
+    <li><a href="#model"><span class="num">3</span>The model</a></li>
+    <li><a href="#definitions"><span class="num">4</span>Definitions</a></li>
+    <li><a href="#result"><span class="num">5</span>Main result</a></li>
+    <li><a href="#animation"><span class="num">6</span>Animation: the terrace in two tubes</a></li>
+    <li><a href="#proof"><span class="num">7</span>Proof</a></li>
+    <li><a href="#conclusion"><span class="num">8</span>Conclusion and outlook</a></li>
+    <li><a href="#references"><span class="num">9</span>References</a></li>
+  </ol>
+  <p class="toc-lang"><a href="index.html" hreflang="pt-BR" lang="pt-BR" data-lang="pt">Versão em português &rarr;</a></p>
+</nav>
+
+<main>
+<details class="toc-mobile">
+  <summary>Contents</summary>
+  <ol>
+    <li><a href="#poster">The poster (PDF)</a></li>
+    <li><a href="#motivation">Motivation</a></li>
+    <li><a href="#semidiscretization">The idea of semidiscretization</a></li>
+    <li><a href="#model">The model</a></li>
+    <li><a href="#definitions">Definitions</a></li>
+    <li><a href="#result">Main result</a></li>
+    <li><a href="#animation">Animation: the terrace in two tubes</a></li>
+    <li><a href="#proof">Proof</a></li>
+    <li><a href="#conclusion">Conclusion and outlook</a></li>
+    <li><a href="#references">References</a></li>
+  </ol>
+</details>
+
+<!-- ============================ POSTER ============================ -->
+<section id="poster" style="margin-top:8px">
+<div class="poster-card">
+  <a class="thumb" href="poster-en.pdf" target="_blank" rel="noopener" title="Open the poster as PDF">
+    <img src="poster-en-preview.jpg" width="900" height="1272" alt="Poster preview: Semidiscrete models for gravitational fingering in the TFE regime">
+  </a>
+  <div>
+    <h2>The poster</h2>
+    <p>Presented at the 34th SIICUSP (International Stage). This page follows the same order as the poster — motivation, model, definitions, main result, idea of the proof and conclusions — and adds what does not fit on a poster: explanatory figures, an animation of the terrace and the complete proof of the Theorem.</p>
+    <div class="btns">
+      <a class="btn" href="poster-en.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7"/><path d="M21 3l-9 9"/><path d="M19 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"/></svg>Open the poster (PDF)</a>
+      <a class="btn secondary" href="poster-en.pdf" download="poster-SIICUSP-2026-Caio-Furtado-EN.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></svg>Download the poster</a>
+      <a class="btn gold" href="#animation">See the animation</a>
+      <a class="btn secondary" href="#proof">Go to the proof</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============================ 1. MOTIVATION ============================ -->
+<section id="motivation">
+<h2><span class="num">1</span>Motivation</h2>
+<p class="lead">Imagine a box containing a heavy fluid on top of a lighter one. What happens physically as time goes by is shown in the simulation below.</p>
+
+<figure>
+<div class="videofig">
+  <video autoplay muted loop playsinline preload="metadata" poster="fingering-frame0.png" aria-label="Numerical simulation of gravitational fingering: heavy fluid (blue) above light fluid (gold); fingers grow through the interface and the mixing zone widens.">
+    <source src="fingering.mp4" type="video/mp4">
+    <source src="fingering.webm" type="video/webm">
+  </video>
+  <div class="labels"><span>heavy<br>fluid</span><span class="mid">mixing<br>zone</span><span class="low">light<br>fluid</span></div>
+</div>
+<figcaption><b>Figure 1.</b> Numerical simulation of the phenomenon: heavy fluid (blue) above light fluid (gold). The interface is unstable: “fingers” form, moving down and up, and the region they occupy — the <em>mixing zone</em> — widens over time. (The video restarts automatically.)</figcaption>
+</figure>
+
+<p>This phenomenon is known as <em class="term">gravitational fingering</em>. The goal of this study is to understand <strong>how fast the mixing zone grows</strong>.</p>
+<p>The semidiscrete model results from simplifying the continuous space to a system of interconnected tubes, representing the “fingers”.</p>
+</section>
+
+<!-- ============================ 2. SEMIDISCRETIZATION ============================ -->
+<section id="semidiscretization">
+<h2><span class="num">2</span>The idea of semidiscretization</h2>
+<p>In the continuous space, the concentration of the heavy fluid depends on two spatial coordinates. The semidiscrete simplification consists in <em>discretizing only the horizontal direction</em>: the domain is replaced by \(n\) interconnected vertical tubes, each representing a “finger”. Inside each tube the vertical coordinate \(y\) remains continuous, and what is tracked is the concentration \(c_k(t,y)\) in the \(k\)-th tube. The tubes exchange fluid with each other through the <em>transverse flow</em>.</p>
+
+<figure>
+<svg viewBox="0 0 780 340" width="780" height="340" role="img" aria-label="From the continuous two-dimensional box (a frame of the simulation) to n interconnected vertical tubes and then to the two-tube case.">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#16325c"/>
+    </marker>
+    <marker id="arrG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a87a1e"/>
+    </marker>
+    <marker id="arrS" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a87a1e"/>
+    </marker>
+    <clipPath id="clipA"><rect x="20" y="40" width="180" height="250"/></clipPath>
+    <linearGradient id="gt1" x1="0" y1="0" x2="0" y2="1"><stop offset="0.30" stop-color="#16325c"/><stop offset="0.37" stop-color="#f4efe4"/><stop offset="0.44" stop-color="#e0a93a"/></linearGradient>
+    <linearGradient id="gt2" x1="0" y1="0" x2="0" y2="1"><stop offset="0.58" stop-color="#16325c"/><stop offset="0.65" stop-color="#f4efe4"/><stop offset="0.72" stop-color="#e0a93a"/></linearGradient>
+    <linearGradient id="gt3" x1="0" y1="0" x2="0" y2="1"><stop offset="0.40" stop-color="#16325c"/><stop offset="0.47" stop-color="#f4efe4"/><stop offset="0.54" stop-color="#e0a93a"/></linearGradient>
+    <linearGradient id="gt4" x1="0" y1="0" x2="0" y2="1"><stop offset="0.66" stop-color="#16325c"/><stop offset="0.73" stop-color="#f4efe4"/><stop offset="0.80" stop-color="#e0a93a"/></linearGradient>
+    <linearGradient id="gt5" x1="0" y1="0" x2="0" y2="1"><stop offset="0.26" stop-color="#16325c"/><stop offset="0.33" stop-color="#f4efe4"/><stop offset="0.40" stop-color="#e0a93a"/></linearGradient>
+    <linearGradient id="gt6" x1="0" y1="0" x2="0" y2="1"><stop offset="0.50" stop-color="#16325c"/><stop offset="0.57" stop-color="#f4efe4"/><stop offset="0.64" stop-color="#e0a93a"/></linearGradient>
+    <linearGradient id="gc1" x1="0" y1="0" x2="0" y2="1"><stop offset="0.30" stop-color="#16325c"/><stop offset="0.38" stop-color="#f4efe4"/><stop offset="0.46" stop-color="#e0a93a"/></linearGradient>
+    <linearGradient id="gc2" x1="0" y1="0" x2="0" y2="1"><stop offset="0.56" stop-color="#16325c"/><stop offset="0.64" stop-color="#f4efe4"/><stop offset="0.72" stop-color="#e0a93a"/></linearGradient>
+  </defs>
+
+  <!-- Panel A: continuous medium (frame of the simulation) -->
+  <g clip-path="url(#clipA)">
+    <image href="fingering-frame.png" x="20" y="40" width="180" height="250" preserveAspectRatio="xMidYMid slice"/>
+  </g>
+  <rect x="20" y="40" width="180" height="250" fill="none" stroke="#16325c" stroke-width="2"/>
+  <text x="110" y="318" text-anchor="middle" font-size="14" fill="#16325c" font-weight="600">continuous medium (2D)</text>
+  <text x="110" y="334" text-anchor="middle" font-size="12" fill="#a87a1e">a frame of the simulation in Figure 1</text>
+
+  <!-- arrow A -> B -->
+  <line x1="212" y1="165" x2="268" y2="165" stroke="#16325c" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="240" y="150" text-anchor="middle" font-size="12" fill="#16325c" font-weight="600">semi-</text>
+  <text x="240" y="186" text-anchor="middle" font-size="12" fill="#16325c" font-weight="600">discretization</text>
+
+  <!-- y axis -->
+  <line x1="286" y1="290" x2="286" y2="46" stroke="#5b6673" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="286" y="36" text-anchor="middle" font-size="14" fill="#5b6673" class="it">y</text>
+
+  <!-- Panel B: n tubes -->
+  <g stroke="#16325c" stroke-width="2">
+    <rect x="300" y="40" width="28" height="250" rx="8" fill="url(#gt1)"/>
+    <rect x="344" y="40" width="28" height="250" rx="8" fill="url(#gt2)"/>
+    <rect x="388" y="40" width="28" height="250" rx="8" fill="url(#gt3)"/>
+    <rect x="432" y="40" width="28" height="250" rx="8" fill="url(#gt4)"/>
+    <rect x="476" y="40" width="28" height="250" rx="8" fill="url(#gt5)"/>
+    <rect x="520" y="40" width="28" height="250" rx="8" fill="url(#gt6)"/>
+  </g>
+  <!-- velocities u_k (arrows inside the tubes) -->
+  <g stroke="#16325c" stroke-width="2.5" fill="none">
+    <line x1="314" y1="236" x2="314" y2="266" marker-end="url(#arr)"/>
+    <line x1="358" y1="266" x2="358" y2="236" marker-end="url(#arr)"/>
+    <line x1="402" y1="236" x2="402" y2="266" marker-end="url(#arr)"/>
+    <line x1="446" y1="266" x2="446" y2="236" marker-end="url(#arr)"/>
+    <line x1="490" y1="236" x2="490" y2="266" marker-end="url(#arr)"/>
+    <line x1="534" y1="266" x2="534" y2="236" marker-end="url(#arr)"/>
+  </g>
+  <!-- transverse flow between neighbouring tubes -->
+  <g stroke="#a87a1e" stroke-width="1.8">
+    <line x1="330" y1="120" x2="342" y2="120" marker-start="url(#arrS)" marker-end="url(#arrS)"/>
+    <line x1="374" y1="120" x2="386" y2="120" marker-start="url(#arrS)" marker-end="url(#arrS)"/>
+    <line x1="418" y1="120" x2="430" y2="120" marker-start="url(#arrS)" marker-end="url(#arrS)"/>
+    <line x1="462" y1="120" x2="474" y2="120" marker-start="url(#arrS)" marker-end="url(#arrS)"/>
+    <line x1="506" y1="120" x2="518" y2="120" marker-start="url(#arrS)" marker-end="url(#arrS)"/>
+    <line x1="330" y1="190" x2="342" y2="190" marker-start="url(#arrS)" marker-end="url(#arrS)"/>
+    <line x1="374" y1="190" x2="386" y2="190" marker-start="url(#arrS)" marker-end="url(#arrS)"/>
+    <line x1="418" y1="190" x2="430" y2="190" marker-start="url(#arrS)" marker-end="url(#arrS)"/>
+    <line x1="462" y1="190" x2="474" y2="190" marker-start="url(#arrS)" marker-end="url(#arrS)"/>
+    <line x1="506" y1="190" x2="518" y2="190" marker-start="url(#arrS)" marker-end="url(#arrS)"/>
+  </g>
+  <!-- tube labels -->
+  <g font-size="14" fill="#16325c" text-anchor="middle" class="it">
+    <text x="314" y="30">c₁</text><text x="358" y="30">c₂</text><text x="402" y="30">c₃</text>
+    <text x="446" y="30">c₄</text><text x="490" y="30">c₅</text><text x="534" y="30">cₙ</text>
+  </g>
+  <text x="424" y="318" text-anchor="middle" font-size="14" fill="#16325c" font-weight="600">n interconnected tubes</text>
+  <text x="424" y="334" text-anchor="middle" font-size="12" fill="#a87a1e">blue arrows: velocity uₖ in the tube · gold arrows: transverse flow</text>
+
+  <!-- arrow B -> C -->
+  <line x1="556" y1="165" x2="600" y2="165" stroke="#16325c" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="578" y="150" text-anchor="middle" font-size="12" fill="#16325c" font-weight="600">n = 2</text>
+
+  <!-- Panel C: two tubes -->
+  <g stroke="#16325c" stroke-width="2">
+    <rect x="628" y="40" width="40" height="250" rx="10" fill="url(#gc1)"/>
+    <rect x="690" y="40" width="40" height="250" rx="10" fill="url(#gc2)"/>
+  </g>
+  <g stroke="#16325c" stroke-width="2.5" fill="none">
+    <line x1="648" y1="230" x2="648" y2="266" marker-end="url(#arr)"/>
+    <line x1="710" y1="266" x2="710" y2="230" marker-end="url(#arr)"/>
+  </g>
+  <g stroke="#a87a1e" stroke-width="1.8">
+    <line x1="670" y1="110" x2="688" y2="110" marker-start="url(#arrG)" marker-end="url(#arrG)"/>
+    <line x1="670" y1="160" x2="688" y2="160" marker-start="url(#arrG)" marker-end="url(#arrG)"/>
+    <line x1="670" y1="210" x2="688" y2="210" marker-start="url(#arrG)" marker-end="url(#arrG)"/>
+  </g>
+  <g font-size="15" fill="#16325c" text-anchor="middle" class="it">
+    <text x="648" y="30">c₁</text><text x="710" y="30">c₂</text>
+  </g>
+  <text x="679" y="318" text-anchor="middle" font-size="14" fill="#16325c" font-weight="600">two tubes (this work)</text>
+  <text x="679" y="334" text-anchor="middle" font-size="12" fill="#a87a1e" class="it">u₁ = −u₂</text>
+</svg>
+<figcaption><b>Figure 2.</b> The semidiscretization. On the left, the continuous two-dimensional medium with the fingers (a frame of the simulation in Figure 1). In the middle, the domain is replaced by \(n\) interconnected vertical tubes: each tube has a concentration \(c_k(t,y)\) and a vertical velocity \(u_k\) (blue arrows); neighbouring tubes exchange fluid through the transverse flow (gold arrows). On the right, the case studied in this work: \(n = 2\).</figcaption>
+</figure>
+
+<p>The evolution of each \(c_k\) combines three mechanisms, which appear as the three terms of the model equation in the next section: vertical <em>transport</em> by the fluid with velocity \(u_k\), <em>diffusion</em> along the tube, and the <em>transverse flow</em> between tubes.</p>
+</section>
+
+<!-- ============================ 3. MODEL ============================ -->
+<section id="model">
+<h2><span class="num">3</span>The model</h2>
+<p>In a system of \(n\) tubes, the evolution of the fluid concentration in the \(k\)-th tube, \(c_k(t,y)\), is formulated as follows:</p>
+\[
+\underbrace{\partial_t c_k + \partial_y(u_k c_k)}_{\text{transport}}
+\;-\; \underbrace{\partial_{yy} c_k}_{\text{diffusion}}
+\;=\; \underbrace{F_k(c_1,\dots,c_n)}_{\text{transverse flow}}
+\]
+<p>where the fluid velocity in the \(k\)-th tube, \(u_k\), is determined by the TFE regime (<em>Transverse Flow Equilibrium</em>):</p>
+\[
+u_k \;=\; \Bigl(\frac1n \sum_{i=1}^{n} c_i\Bigr) - c_k \;:=\; \bar c - c_k .
+\]
+<p>We adopt the <em class="term">Lax–Friedrichs</em> model for the transverse flow function \(F_k\):</p>
+\[
+F_k(c_1,\dots,c_n) \;:=\; -\frac1n \sum_{j=1}^{n} w_{kj}\,\frac{c_j + c_k}{2},
+\qquad
+w_{kj} \;:=\; \partial_y\bigl(u_j - u_k\bigr).
+\]
+<p>Here \(w_{kj}\) is the transverse flux from tube \(k\) to tube \(j\), obtained by mass conservation from the vertical velocities; the Lax–Friedrichs model evaluates the concentration carried by this flux as the average \(\tfrac12(c_j + c_k)\) of the two tubes.</p>
+<p>In this project, we consider the two-tube case (\(n=2\)). Substituting the definitions into the concentration equation, we obtain the following nonlinear PDE:</p>
+<div class="eqbox eqrow">
+<div class="eq">
+\[
+\begin{aligned}
+&\partial_t c + A(c)\,\partial_y c = \partial_{yy} c, \\[6pt]
+&c = \begin{pmatrix} c_1 \\ c_2 \end{pmatrix}, \qquad
+A(c) = \frac{(c_1 - c_2)}{4}\begin{pmatrix} -3 & 1 \\ -1 & 3 \end{pmatrix}.
+\end{aligned}
+\]
+</div>
+<span class="eqlabel">(I)</span>
+</div>
+<p>Diagonalizing the constant matrix above, the following change of variables turns out to be promising:</p>
+\[
+g_1 = \frac{c_1 - k c_2}{k-1}, \qquad g_2 = \frac{k c_1 - c_2}{k-1}, \qquad k = 3 + 2\sqrt2 .
+\]
+<p>Rescaling \(y \mapsto y/2\) and \(t \mapsto t/4\), the system becomes:</p>
+<div class="eqbox eqrow">
+<div class="eq">
+\[
+\begin{cases}
+\partial_t g_1 + (g_1 + g_2)\,\partial_y g_1 = \partial_{yy} g_1 \\[4pt]
+\partial_t g_2 - (g_1 + g_2)\,\partial_y g_2 = \partial_{yy} g_2
+\end{cases}
+\]
+</div>
+<span class="eqlabel">(II)</span>
+</div>
+<p>Thus, the problem reduces to a <strong>system of coupled Burgers equations</strong>. Throughout this page, (I) denotes the system in the original variables \(c\) and (II) the system in the variables \(g\), already rescaled.</p>
+
+<div class="env obs">
+<p class="env-title">Remark <span class="sub">(what the change of variables does)</span></p>
+<p>The matrix \(\begin{pmatrix} -3 & 1 \\ -1 & 3 \end{pmatrix}\) has eigenvalues \(\pm 2\sqrt2\), with eigenvectors \((1,k)\) and \((k,1)\), \(k = 3+2\sqrt2\); the change \(c \mapsto g\) is exactly the one that diagonalizes this matrix. The inverse transformation is
+\[
+c_1 = \frac{k g_2 - g_1}{k+1}, \qquad c_2 = \frac{g_2 - k g_1}{k+1},
+\]
+and, since \(\frac{k-1}{k+1} = \frac{\sqrt2}{2}\), the difference between the tubes becomes \(c_1 - c_2 = \frac{g_1 + g_2}{\sqrt2}\). In particular, the states \(c_- = (-1,-1)\) and \(c_+ = (1,1)\) (light fluid below, heavy fluid above) correspond to \(g_- = (1,-1)\) and \(g_+ = (-1,1)\). The proof is carried out in these variables.</p>
+</div>
+</section>
+
+<!-- ============================ 4. DEFINITIONS ============================ -->
+<section id="definitions">
+<h2><span class="num">4</span>Definitions</h2>
+
+<div class="env def">
+<p class="env-title">Definition I <span class="sub">(traveling wave)</span></p>
+<p>Let \(f(t,y) : \mathbb{R}_+ \times \mathbb{R} \to \mathbb{R}^n\), \(n \in \mathbb{N}\), be a solution of the system such that
+\[ f(t,y) = W(y - vt) \quad \text{is continuous, with:} \]</p>
+<ul class="plain">
+  <li>\(v \in \mathbb{R}\);</li>
+  <li>\(W(-\infty) = f_- \in \mathbb{R}^n\) and \(W(+\infty) = f_+ \in \mathbb{R}^n\).</li>
+</ul>
+<p>Then \(f\) is a <em class="term">traveling wave</em> with speed \(v\) connecting \(f_-\) and \(f_+\). We call \(W\) the <em class="term">wave profile</em>.
+\[ f_- \;\xrightarrow{\;W\;}\; f_+ \]</p>
+</div>
+
+<figure>
+<svg id="figWave" viewBox="0 0 460 210" width="460" height="210" role="img" aria-label="Traveling wave profile moving with speed v."></svg>
+<figcaption><b>Figure 3.</b> A traveling wave: the profile \(W\) connects the state \(f_-\) (on the left) to the state \(f_+\) (on the right) and, as time goes by, it only moves with speed \(v\), without changing shape.</figcaption>
+</figure>
+
+<div class="env def">
+<p class="env-title">Definition II <span class="sub">(propagating terrace, of two traveling waves)</span></p>
+<p>A propagating terrace is a set \(\{c_-, c_0, c_+\} \subset \mathbb{R}^n\) and \(v_1, v_2 \in \mathbb{R}\), such that there exist wave profiles \(W_1(y - v_1 t)\) and \(W_2(y - v_2 t)\) satisfying:</p>
+<ul class="plain">
+  <li>\(W_1(-\infty) = c_-\);</li>
+  <li>\(W_1(+\infty) = W_2(-\infty) = c_0\);</li>
+  <li>\(W_2(+\infty) = c_+\);</li>
+  <li>\(v_1 < v_2\).</li>
+</ul>
+<p>\[ c_- \;\xrightarrow{\;W_1\;}\; c_0 \;\xrightarrow{\;W_2\;}\; c_+ \]</p>
+</div>
+
+<figure>
+<svg id="figTerrace" viewBox="0 0 480 232" width="480" height="232" role="img" aria-label="Propagating terrace: two waves with different speeds and an intermediate plateau that widens."></svg>
+<figcaption><b>Figure 4.</b> A propagating terrace. The wave \(W_1\) takes \(c_-\) to the intermediate state \(c_0\) and the wave \(W_2\) takes \(c_0\) to \(c_+\). Since \(v_1 &lt; v_2\), the two waves move apart and the plateau at \(c_0\) widens linearly in time: the width of the region between the waves grows like \((v_2 - v_1)\,t\). It is this plateau that will play the role of the mixing zone.</figcaption>
+</figure>
+</section>
+
+<!-- ============================ 5. MAIN RESULT ============================ -->
+<section id="result">
+<h2><span class="num">5</span>Main result</h2>
+
+<div class="env teorema">
+<p class="env-title">Theorem</p>
+<p><em>For system (I), there exist exactly two propagating terraces of two traveling waves connecting the states \((-1,-1)\) and \((1,1)\). Moreover, the waves move with speeds \(v_1 = -\tfrac12\) and \(v_2 = \tfrac12\), and the terraces pass through the intermediate states
+\[ (c_1, c_2) = \pm\Bigl(\tfrac{\sqrt2}{2},\, -\tfrac{\sqrt2}{2}\Bigr). \]</em></p>
+</div>
+
+<p>In words: starting from light fluid below (\(c = (-1,-1)\)) and heavy fluid above (\(c = (1,1)\)), the two-tube system admits exactly two terrace configurations. In one of them, tube 1 is “ahead” in the mixing zone (\(c_1 = \tfrac{\sqrt2}{2}\), \(c_2 = -\tfrac{\sqrt2}{2}\)); in the other, the roles of the tubes are swapped. In both, the lower wave moves down with speed \(\tfrac12\) and the upper wave moves up with speed \(\tfrac12\): the mixing zone — the plateau between the two waves — grows linearly, with width \((v_2 - v_1)\,t = t\).</p>
+
+<div class="figrow">
+<figure style="flex:0 1 250px">
+<svg viewBox="0 0 250 360" width="250" height="360" role="img" aria-label="Two tubes with the three states of the terrace: (1,1) on top, (√2/2, −√2/2) in the middle and (−1,−1) at the bottom.">
+  <defs>
+    <linearGradient id="tubeL" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0.00" stop-color="#16325c"/><stop offset="0.26" stop-color="#16325c"/>
+      <stop offset="0.34" stop-color="#576984"/><stop offset="0.66" stop-color="#576984"/>
+      <stop offset="0.74" stop-color="#e0a93a"/><stop offset="1" stop-color="#e0a93a"/>
+    </linearGradient>
+    <linearGradient id="tubeR" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0.00" stop-color="#16325c"/><stop offset="0.26" stop-color="#16325c"/>
+      <stop offset="0.34" stop-color="#e6be6c"/><stop offset="0.66" stop-color="#e6be6c"/>
+      <stop offset="0.74" stop-color="#e0a93a"/><stop offset="1" stop-color="#e0a93a"/>
+    </linearGradient>
+  </defs>
+  <text x="80" y="24" text-anchor="middle" font-size="16" fill="#16325c" class="it">c₁</text>
+  <text x="140" y="24" text-anchor="middle" font-size="16" fill="#16325c" class="it">c₂</text>
+  <rect x="52" y="34" width="56" height="300" fill="url(#tubeL)" stroke="#16325c" stroke-width="2"/>
+  <rect x="112" y="34" width="56" height="300" fill="url(#tubeR)" stroke="#16325c" stroke-width="2"/>
+  <g font-size="15" text-anchor="middle" fill="#fff" class="it">
+    <text x="80" y="80">1</text><text x="140" y="80">1</text>
+    <text x="80" y="188">√2⁄2</text>
+  </g>
+  <g font-size="15" text-anchor="middle" fill="#16325c" class="it">
+    <text x="140" y="188">−√2⁄2</text>
+    <text x="80" y="300">−1</text><text x="140" y="300">−1</text>
+  </g>
+  <!-- speed arrows -->
+  <line x1="30" y1="126" x2="30" y2="96" stroke="#a87a1e" stroke-width="2" marker-end="url(#arrG)"/>
+  <text x="30" y="88" text-anchor="middle" font-size="11" fill="#a87a1e">v₂ = ½</text>
+  <line x1="30" y1="246" x2="30" y2="276" stroke="#a87a1e" stroke-width="2" marker-end="url(#arrG)"/>
+  <text x="30" y="290" text-anchor="middle" font-size="11" fill="#a87a1e">v₁ = −½</text>
+  <!-- mixing zone brace -->
+  <path d="M178,112 q8,0 8,8 v50 q0,8 8,8 q-8,0 -8,8 v50 q0,8 -8,8" fill="none" stroke="#16325c" stroke-width="1.6"/>
+  <text x="204" y="183" font-size="12" fill="#16325c" font-weight="600">mixing</text>
+  <text x="204" y="197" font-size="12" fill="#16325c" font-weight="600">zone</text>
+</svg>
+<figcaption><b>Figure 5.</b> One of the two terraces, seen in the tubes: on top both tubes are at \(1\); at the bottom at \(-1\); in the mixing zone, tube 1 is at \(\tfrac{\sqrt2}{2}\) and tube 2 at \(-\tfrac{\sqrt2}{2}\). The zone widens with speed \(\tfrac12\) on each side.</figcaption>
+</figure>
+
+<figure style="flex:1 1 320px">
+<svg id="figProfiles" viewBox="0 0 440 320" width="440" height="320" role="img" aria-label="Profiles of c1 and c2 as functions of y for the terrace, showing the intermediate plateau."></svg>
+<figcaption><b>Figure 6.</b> The profiles \(c_1(y)\) (blue) and \(c_2(y)\) (gold) of the same terrace, at a fixed time (\(t=100\)): between the two waves, \(c_1 = \tfrac{\sqrt2}{2}\) and \(c_2 = -\tfrac{\sqrt2}{2}\).</figcaption>
+</figure>
+</div>
+</section>
+
+<!-- ============================ 6. ANIMATION ============================ -->
+<section id="animation">
+<h2><span class="num">6</span>Animation: the terrace in two tubes</h2>
+<p>The simulation below solves system (I) numerically (finite differences, explicit scheme on \(y \in [-150,150]\)) from an initial condition in which both tubes have the heavy fluid on top and the light fluid below, but with the interface of tube 1 slightly below the interface of tube 2. On the left, the tubes coloured by concentration (blue \(= 1\), gold \(= -1\), with the same colour scale as Figure 1); on the right, the profiles \(c_1\) and \(c_2\) as functions of \(y\), with \(y\) on the vertical axis to follow the tubes.</p>
+<p>Two things to observe, both predicted by the Theorem: the intermediate plateaus adjust by themselves to \(\pm\tfrac{\sqrt2}{2}\) (vertical dashed lines), and the two fronts move apart with speeds \(\mp\tfrac12\), so that the width of the mixing zone grows linearly with rate \(1\).</p>
+
+<div class="anim">
+  <canvas id="simCanvas" width="880" height="520"></canvas>
+  <div class="controls">
+    <button id="btnPlay">Pause</button>
+    <button id="btnReset" class="secondary">Reset</button>
+    <label>Terrace:
+      <select id="selVariant">
+        <option value="A">A — tube 1 ahead: c₀ = (√2/2, −√2/2)</option>
+        <option value="B">B — tube 2 ahead: c₀ = (−√2/2, √2/2)</option>
+      </select></label>
+    <label>Speed:
+      <select id="selSpeed"><option value="1">1×</option><option value="2" selected>2×</option><option value="4">4×</option></select></label>
+    <span class="readout" id="readout"></span>
+  </div>
+</div>
+<p class="small">About the initial condition: if the two tubes started from exactly the same profile (\(c_1 \equiv c_2\)), we would have \(A(c) = 0\) in (I) and the solution would only diffuse — it is the difference between the tubes that drives the transport. Swapping which tube is ahead (option “Terrace B”) leads to the other intermediate state of the Theorem.</p>
+</section>
+
+<!-- ============================ 7. PROOF ============================ -->
+<section id="proof">
+<h2><span class="num">7</span>Proof</h2>
+<p>The poster presents only the idea of the proof, in two parts — <em>existence</em> (looking for traveling waves inside two invariant planes) and <em>uniqueness</em> (showing that every traveling wave lives in one of these planes). Here the proof is carried out in full, in six steps. The whole analysis is done in the variables \(g\) of system (II); the translation back to the variables \(c\) of system (I) is Step 0.</p>
+
+<h3>Step 0 — It suffices to work with system (II)</h3>
+<p>The change of variables \(c \mapsto g\) of Section 3 is linear and invertible, and the rescaling \(\tilde y = y/2\), \(\tilde t = t/4\) takes (I) to (II). If \(c(t,y) = W(y - vt)\) is a traveling wave of (I) with speed \(v\), then, since
+\[ y - vt \;=\; 2\Bigl(\tilde y - 2v\,\tilde t\Bigr), \]
+the corresponding function \(g\) is a traveling wave of (II) with speed \(\tilde v = 2v\) in the rescaled variables; and conversely. States, limits at infinity and the order \(v_1 &lt; v_2\) are preserved. Since \(c_\pm = \pm(1,1)\) correspond to \(g_- = (1,-1)\) and \(g_+ = (-1,1)\), the Theorem is equivalent to the following statement:</p>
+<div class="env lema">
+<p class="env-title">Claim <span class="sub">(the Theorem in the variables \(g\))</span></p>
+<p>System (II) has exactly two propagating terraces of two traveling waves connecting \(g_- = (1,-1)\) to \(g_+ = (-1,1)\). In both, \(\tilde v_1 = -1\) and \(\tilde v_2 = 1\); the intermediate states are \((-1,-1)\) and \((1,1)\).</p>
+</div>
+<p>Indeed, \(\tilde v = \pm 1\) corresponds to \(v = \pm\tfrac12\), and by the inverse transformation of Section 3, \(g = (1,1)\) corresponds to \(c = \bigl(\tfrac{\sqrt2}{2}, -\tfrac{\sqrt2}{2}\bigr)\) and \(g = (-1,-1)\) to \(c = \bigl(-\tfrac{\sqrt2}{2}, \tfrac{\sqrt2}{2}\bigr)\).</p>
+
+<h3>Step 1 — Reduction to a system of ODEs</h3>
+<p>Looking for traveling waves \(g(t,y) = g(\xi)\), \(\xi = y - vt\), reduces system (II) to ODEs: substituting, \(\partial_t g_i = -v\,g_i'\), \(\partial_y g_i = g_i'\), \(\partial_{yy} g_i = g_i''\), we obtain
+\[
+g_1'' = (g_1 + g_2 - v)\,g_1', \qquad g_2'' = -(g_1 + g_2 + v)\,g_2'.
+\]
+Writing \(h_i = g_i'\), this is the first-order system in \(\mathbb{R}^4\)
+</p>
+<div class="eqrow plain">
+<div class="eq">
+\[
+\begin{aligned}
+\dot g_1 &= h_1, &\qquad \dot h_1 &= h_1\,(g_1 + g_2 - v), \\
+\dot g_2 &= h_2, &\qquad \dot h_2 &= -h_2\,(g_1 + g_2 + v),
+\end{aligned}
+\]
+</div>
+<span class="eqlabel">(ODE)</span>
+</div>
+<p>where the dot denotes \(d/d\xi\). A traveling wave connecting \(a\) to \(b\) is a solution of (ODE) with \(g(-\infty) = a\), \(g(+\infty) = b\) and \(h(\pm\infty) = 0\).</p>
+<details class="knowl">
+<summary>Why does \(h = g' \to 0\) at infinity?</summary>
+<p>By the second part of (ODE), \(h_1(\xi) = h_1(0)\exp\!\bigl(\int_0^\xi (g_1+g_2-v)\,ds\bigr)\); hence \(h_1\) is either identically zero or never vanishes and has constant sign. In the second case, \(g_1\) is strictly monotone and \(g_1(\xi) = g_1(0) + \int_0^\xi h_1\) has a finite limit, so that \(\int_0^{\pm\infty} h_1\) converges. Since the exponent has bounded derivative \(g_1 + g_2 - v\), \(h_1\) varies in a controlled way on intervals of length 1 (\(h_1(\xi+s)/h_1(\xi)\) stays between positive constants for \(0\le s\le 1\)); if \(h_1\) did not tend to zero, the integral would diverge. Therefore \(h_1(\pm\infty) = 0\), and the same argument applies to \(h_2\).</p>
+</details>
+
+<h3>Step 2 — The invariant planes \(h_1 = 0\) and \(h_2 = 0\)</h3>
+<div class="env lema">
+<p class="env-title">Lemma 1</p>
+<p>Let \((g,h)\) be a solution of (ODE). If \(h_1(\xi_0) = 0\) for some \(\xi_0\), then \(h_1 \equiv 0\), that is, \(g_1\) is constant. Analogously for \(h_2\). In other words, the planes \(\{h_1 = 0\}\) and \(\{h_2 = 0\}\) are invariant under the flow of (ODE).</p>
+</div>
+<div class="proof"><p><span class="proof-label">Proof.</span> System (ODE) is autonomous with a smooth vector field, so the existence and uniqueness theorem for solutions holds (see, for instance, <a href="#references">[2]</a>); in particular, if a set is made of solutions, no other solution can cross it. Here this can be seen directly: the equation for \(h_1\) is linear in \(h_1\) with continuous coefficient, and integrates explicitly:
+\[ h_1(\xi) = h_1(\xi_0)\,\exp\!\Bigl(\int_{\xi_0}^{\xi} \bigl(g_1(s) + g_2(s) - v\bigr)\,ds\Bigr). \]
+If \(h_1(\xi_0) = 0\), then \(h_1 \equiv 0\). The same holds for \(h_2\), with coefficient \(-(g_1+g_2+v)\). <span class="qed"></span></p></div>
+<div class="clear"></div>
+<p>Consequence: in a traveling wave of (II), each component \(g_i\) is either constant or strictly monotone (since \(h_i\) does not vanish and has constant sign).</p>
+
+<h3>Step 3 — Uniqueness: every traveling wave lives in an invariant plane</h3>
+<p>This is the heart of part “II. Uniqueness” of the poster.</p>
+<div class="env lema">
+<p class="env-title">Lemma 2</p>
+<p>Let \(g(\xi)\) be the profile of a traveling wave of (II) with speed \(v\). Then \(h_1 h_2 \equiv 0\); hence, by Lemma 1, either \(g_1\) is constant (the wave lives in the plane \(h_1 = 0\)) or \(g_2\) is constant (the wave lives in the plane \(h_2 = 0\)).</p>
+</div>
+<div class="proof"><p><span class="proof-label">Proof.</span> We analyze the derivative of the expression \(P(\xi) = h_1(\xi)\,h_2(\xi)\). By (ODE),
+\[
+\dot P = \dot h_1 h_2 + h_1 \dot h_2 = h_1 h_2\,(g_1 + g_2 - v) - h_1 h_2\,(g_1 + g_2 + v) = h_1 h_2\,(-2v) = -2v\,P .
+\]
+The analytical solution of this ODE is \(P(\xi) = P_0\,e^{-2v\xi}\), with \(P_0 = P(0)\). Since \(h_1, h_2 \to 0\) as \(\xi \to \pm\infty\), the function \(P(\xi)\) must be bounded (in fact, tend to zero at both infinities). However, if \(v \neq 0\), the exponential \(e^{-2v\xi}\) diverges at one of the infinities, which is incompatible with \(P\) bounded unless \(P_0 = 0\). If \(v = 0\), \(P \equiv P_0\) and \(P(\xi)\to 0\) also force \(P_0 = 0\). Hence
+\[ P_0 = 0 \;\Longrightarrow\; h_1(\xi)\,h_2(\xi) \equiv 0 . \]
+If \(h_1\) were not identically zero, by Lemma 1 it would never vanish, and then \(h_2 \equiv 0\). We conclude that \(h_1 \equiv 0\) or \(h_2 \equiv 0\). <span class="qed"></span></p></div>
+<div class="clear"></div>
+<p>We conclude that all connections must be contained in the planes \(h_1 = 0\) or \(h_2 = 0\). This reduces the search for traveling waves of (II) to a <em>scalar</em> problem on each plane, which is what we do next.</p>
+
+<h3>Step 4 — The waves inside each plane: scalar Burgers equation</h3>
+<div class="env lema">
+<p class="env-title">Lemma 3 <span class="sub">(waves in the plane \(h_2 = 0\))</span></p>
+<p>Let \(g_2 \equiv \beta\) be constant. There exists a traveling wave of (II) with \(g_2 \equiv \beta\), speed \(v\), \(g_1(-\infty) = a\) and \(g_1(+\infty) = b\) (\(a \neq b\)) if, and only if,
+\[ a &gt; b \qquad\text{and}\qquad v = \beta + \frac{a+b}{2}. \]
+In that case the profile is unique up to translation, given by
+\[ g_1(\xi) = \frac{a+b}{2} - \frac{a-b}{2}\,\tanh\!\Bigl(\frac{(a-b)\,\xi}{4}\Bigr). \]</p>
+</div>
+<div class="proof"><p><span class="proof-label">Proof.</span> In the plane \(h_2 = 0\) the equation for \(g_1\) is
+\[ g_1'' = (g_1 + \beta - v)\,g_1' = \frac{d}{d\xi}\Bigl[\frac{g_1^2}{2} + (\beta - v)\,g_1\Bigr]. \]
+Integrating once,
+\[ g_1' = \frac{g_1^2}{2} + (\beta - v)\,g_1 + C , \]
+for some constant \(C\). Letting \(\xi \to \pm\infty\), where \(g_1' \to 0\) and \(g_1 \to a, b\), we see that \(a\) and \(b\) are the two roots of the quadratic polynomial on the right, that is,
+\[ g_1' = \tfrac12\,(g_1 - a)(g_1 - b), \]
+and comparing the coefficient of \(g_1\) we obtain \(\beta - v = -\tfrac{a+b}{2}\), that is, \(v = \beta + \tfrac{a+b}{2}\). Between the roots the right-hand side is negative, so \(g_1\) is decreasing along the connection: necessarily \(a &gt; b\) (a solution starting from \(a\) at \(-\infty\) can only reach \(b\) at \(+\infty\) by going down). Conversely, given \(a &gt; b\) and \(\beta\), the scalar ODE \(g_1' = \tfrac12 (g_1 - a)(g_1 - b)\) has the explicit solution above — one checks it by differentiating —, which is the unique one (up to translation in \(\xi\)) with values between \(b\) and \(a\), by uniqueness of solutions of autonomous scalar ODEs <a href="#references">[2]</a>; with \(v = \beta + \tfrac{a+b}{2}\), it satisfies \(g_1'' = (g_1 + \beta - v)g_1'\) and therefore defines a traveling wave of (II). <span class="qed"></span></p></div>
+<div class="clear"></div>
+
+<figure>
+<svg viewBox="0 0 440 80" width="440" height="80" role="img" aria-label="Phase line of the scalar ODE: the flow goes from a to b, with a greater than b.">
+  <line x1="30" y1="40" x2="410" y2="40" stroke="#5b6673" stroke-width="1.5"/>
+  <circle cx="140" cy="40" r="5" fill="#16325c"/>
+  <circle cx="300" cy="40" r="5" fill="#16325c"/>
+  <text x="140" y="24" text-anchor="middle" font-size="14" fill="#16325c" class="it">b</text>
+  <text x="300" y="24" text-anchor="middle" font-size="14" fill="#16325c" class="it">a</text>
+  <line x1="250" y1="40" x2="196" y2="40" stroke="#e0a93a" stroke-width="3" marker-end="url(#arrG)"/>
+  <line x1="60" y1="40" x2="100" y2="40" stroke="#c7cbd6" stroke-width="2" marker-end="url(#arrG)"/>
+  <line x1="340" y1="40" x2="380" y2="40" stroke="#c7cbd6" stroke-width="2" marker-end="url(#arrG)"/>
+  <text x="220" y="68" text-anchor="middle" font-size="12" fill="#a87a1e">g₁′ = ½ (g₁ − a)(g₁ − b) &lt; 0 between b and a</text>
+  <text x="420" y="45" font-size="13" fill="#5b6673" class="it">g₁</text>
+</svg>
+<figcaption><b>Figure 7.</b> Phase line of the scalar ODE of Lemma 3. Between the roots the field points to the left, so the connection goes from the larger value \(a\) (at \(\xi=-\infty\)) to the smaller one \(b\) (at \(\xi=+\infty\)).</figcaption>
+</figure>
+
+<div class="env lema">
+<p class="env-title">Lemma 3′ <span class="sub">(waves in the plane \(h_1 = 0\))</span></p>
+<p>Let \(g_1 \equiv \alpha\) be constant. There exists a traveling wave of (II) with \(g_1 \equiv \alpha\), speed \(v\), \(g_2(-\infty) = a\) and \(g_2(+\infty) = b\) (\(a \neq b\)) if, and only if,
+\[ a &lt; b \qquad\text{and}\qquad v = -\alpha - \frac{a+b}{2}. \]
+In that case the profile is unique up to translation, given by
+\[ g_2(\xi) = \frac{a+b}{2} + \frac{b-a}{2}\,\tanh\!\Bigl(\frac{(b-a)\,\xi}{4}\Bigr). \]</p>
+</div>
+<div class="proof"><p><span class="proof-label">Proof.</span> Identical to that of Lemma 3, with the sign changed: \(g_2'' = -(\alpha + g_2 + v)\,g_2'\) integrates to \(g_2' = -\tfrac{g_2^2}{2} - (\alpha + v)\,g_2 + C = -\tfrac12 (g_2 - a)(g_2 - b)\), whence \(\alpha + v = -\tfrac{a+b}{2}\). Now the right-hand side is positive between the roots, \(g_2\) is increasing and \(a &lt; b\). <span class="qed"></span></p></div>
+<div class="clear"></div>
+<div class="env obs">
+<p class="env-title">Remark</p>
+<p>On each invariant plane, (II) reduces to a single viscous Burgers equation; the profiles above are exactly the viscous shocks of Burgers (hyperbolic tangent profiles), and the speed formula is the corresponding Rankine–Hugoniot condition. Note the asymmetry: in the plane \(h_2 = 0\) the component \(g_1\) can only <em>decrease</em> along the wave; in the plane \(h_1 = 0\) the component \(g_2\) can only <em>increase</em>.</p>
+</div>
+
+<h3>Step 5 — Which states does a wave connect to \(g_-\) and to \(g_+\)?</h3>
+<p>We apply Lemmas 3 and 3′ to the two states of interest. Integrating the system along the invariant planes, we parametrize the trajectories in terms of \(v\), which allows us to determine exactly the intermediate states where the waves connect.</p>
+<div class="env lema">
+<p class="env-title">Corollary</p>
+<p><b>(a) Waves leaving \(g_- = (1,-1)\).</b> A traveling wave with speed \(v\) and \(g(-\infty) = g_-\) reaches, at \(+\infty\), exactly one of the states
+\[ (1 + 2v,\,-1) \quad\text{(plane } h_2 = 0\text{)} \qquad\text{or}\qquad (1,\,-1 - 2v) \quad\text{(plane } h_1 = 0\text{)}, \]
+and in both cases \(v &lt; 0\) is required.</p>
+<p><b>(b) Waves arriving at \(g_+ = (-1,1)\).</b> A traveling wave with speed \(v\) and \(g(+\infty) = g_+\) leaves, at \(-\infty\), from exactly one of the states
+\[ (-1 + 2v,\,1) \quad\text{(plane } h_2 = 0\text{)} \qquad\text{or}\qquad (-1,\,1 - 2v) \quad\text{(plane } h_1 = 0\text{)}, \]
+and in both cases \(v &gt; 0\) is required.</p>
+<p>Conversely, for each \(v\) with the indicated sign, the corresponding wave exists (Lemmas 3 and 3′).</p>
+</div>
+<div class="proof"><p><span class="proof-label">Proof.</span> By Lemma 2, the wave lives in one of the planes. <em>(a)</em> In the plane \(h_2 = 0\): \(\beta = -1\), \(a = 1\) and, by Lemma 3, \(v = -1 + \tfrac{1 + b}{2}\), that is, \(b = 1 + 2v\); the condition \(a &gt; b\) is \(v &lt; 0\). In the plane \(h_1 = 0\): \(\alpha = 1\), \(a = -1\) and, by Lemma 3′, \(v = -1 - \tfrac{-1 + b}{2}\), that is, \(b = -1 - 2v\); the condition \(a &lt; b\) is \(v &lt; 0\). <em>(b)</em> In the plane \(h_2 = 0\): \(\beta = 1\), \(b = -1\), \(v = 1 + \tfrac{a - 1}{2}\), hence \(a = -1 + 2v\), and \(a &gt; b\) is \(v &gt; 0\). In the plane \(h_1 = 0\): \(\alpha = -1\), \(b = 1\), \(v = 1 - \tfrac{a + 1}{2}\), hence \(a = 1 - 2v\), and \(a &lt; b\) is \(v &gt; 0\). <span class="qed"></span></p></div>
+<div class="clear"></div>
+
+<figure>
+<svg viewBox="0 0 470 430" width="470" height="430" role="img" aria-label="The (g1,g2) plane with the four lines of states reachable from g- and reaching g+, and the two intersection points (1,1) and (-1,-1).">
+  <!-- axes -->
+  <line x1="40" y1="210" x2="440" y2="210" stroke="#5b6673" stroke-width="1.3" marker-end="url(#arr)"/>
+  <line x1="230" y1="400" x2="230" y2="30" stroke="#5b6673" stroke-width="1.3" marker-end="url(#arr)"/>
+  <text x="446" y="215" font-size="15" fill="#5b6673" class="it">g₁</text>
+  <text x="238" y="30" font-size="15" fill="#5b6673" class="it">g₂</text>
+  <g font-size="12" fill="#5b6673" text-anchor="middle">
+    <text x="311" y="226">1</text><text x="148" y="226">−1</text>
+    <text x="222" y="145" text-anchor="end">1</text><text x="222" y="285" text-anchor="end">−1</text>
+    <text x="240" y="226">0</text>
+  </g>
+  <g stroke="#5b6673" stroke-width="1"><line x1="300" y1="206" x2="300" y2="214"/><line x1="160" y1="206" x2="160" y2="214"/><line x1="226" y1="140" x2="234" y2="140"/><line x1="226" y1="280" x2="234" y2="280"/></g>
+
+  <!-- horizontal lines (plane h2 = 0, blue) -->
+  <line x1="300" y1="280" x2="46" y2="280" stroke="#1f4a86" stroke-width="2.6" marker-end="url(#arr)"/>
+  <line x1="434" y1="140" x2="160" y2="140" stroke="#1f4a86" stroke-width="2.6" marker-end="url(#arr)"/>
+  <!-- vertical lines (plane h1 = 0, gold) -->
+  <line x1="300" y1="280" x2="300" y2="40" stroke="#e0a93a" stroke-width="2.6" marker-end="url(#arrG)"/>
+  <line x1="160" y1="390" x2="160" y2="140" stroke="#e0a93a" stroke-width="2.6" marker-end="url(#arrG)"/>
+
+  <!-- parametrization labels -->
+  <text x="46" y="300" font-size="13" fill="#1f4a86" font-weight="600">(1 + 2v, −1)</text>
+  <text x="46" y="316" font-size="13" fill="#1f4a86" font-weight="600">v &lt; 0</text>
+  <text x="312" y="130" font-size="13" fill="#1f4a86" font-weight="600">(−1 + 2v, 1),  v &gt; 0</text>
+  <text x="308" y="52" font-size="13" fill="#a87a1e" font-weight="600">(1, −1 − 2v),  v &lt; 0</text>
+  <text x="168" y="384" font-size="13" fill="#a87a1e" font-weight="600">(−1, 1 − 2v),  v &gt; 0</text>
+
+  <!-- points -->
+  <circle cx="300" cy="280" r="6" fill="#16325c"/>
+  <circle cx="160" cy="140" r="6" fill="#16325c"/>
+  <text x="318" y="296" font-size="15" fill="#16325c" class="it" font-weight="600">g₋</text>
+  <text x="132" y="132" font-size="15" fill="#16325c" class="it" font-weight="600">g₊</text>
+  <!-- intermediate states -->
+  <circle cx="300" cy="140" r="7" fill="#fff" stroke="#16325c" stroke-width="2.4"/>
+  <circle cx="160" cy="280" r="7" fill="#fff" stroke="#16325c" stroke-width="2.4"/>
+  <text x="312" y="164" font-size="13" fill="#16325c" font-weight="600">(1, 1): terrace A</text>
+  <text x="150" y="250" font-size="13" fill="#16325c" font-weight="600" text-anchor="end">(−1, −1):</text>
+  <text x="150" y="266" font-size="13" fill="#16325c" font-weight="600" text-anchor="end">terrace B</text>
+  <!-- legend -->
+  <g font-size="12">
+    <line x1="312" y1="396" x2="338" y2="396" stroke="#1f4a86" stroke-width="2.6"/><text x="344" y="400" fill="#1f4a86">plane h₂ = 0 (g₂ fixed)</text>
+    <line x1="312" y1="416" x2="338" y2="416" stroke="#e0a93a" stroke-width="2.6"/><text x="344" y="420" fill="#a87a1e">plane h₁ = 0 (g₁ fixed)</text>
+  </g>
+</svg>
+<figcaption><b>Figure 8.</b> The \((g_1, g_2)\) plane. The two lines leaving \(g_-\) (to the left and upwards) are the states reachable by a wave with speed \(v &lt; 0\); the two lines arriving at \(g_+\) (from the right and from below) are the states from which a wave with speed \(v &gt; 0\) reaches \(g_+\). The arrows indicate the direction in which \(g\) traverses each wave (from \(\xi = -\infty\) to \(+\infty\)). An intermediate state of a terrace must lie on a line of each family: there are only two such points, \((1,1)\) and \((-1,-1)\).</figcaption>
+</figure>
+
+<h3>Step 6 — Counting the terraces and conclusion</h3>
+<p>Let \(\{g_-, c_0, g_+\}\), \(\tilde v_1 &lt; \tilde v_2\), be a propagating terrace of (II). The wave \(W_1\) leaves \(g_-\) with speed \(\tilde v_1\), so, by Corollary (a), \(c_0\) lies on the horizontal line \(\{g_2 = -1\}\) or on the vertical line \(\{g_1 = 1\}\). The wave \(W_2\) arrives at \(g_+\) with speed \(\tilde v_2\), so, by Corollary (b), \(c_0\) lies on the horizontal line \(\{g_2 = 1\}\) or on the vertical line \(\{g_1 = -1\}\). There are four combinations:</p>
+<ul class="plain">
+  <li>\(\{g_2 = -1\} \cap \{g_2 = 1\} = \varnothing\) and \(\{g_1 = 1\} \cap \{g_1 = -1\} = \varnothing\): impossible.</li>
+  <li>\(\{g_2 = -1\} \cap \{g_1 = -1\} = \{(-1,-1)\}\). Then \(1 + 2\tilde v_1 = -1\) and \(1 - 2\tilde v_2 = -1\), that is, \(\tilde v_1 = -1\) and \(\tilde v_2 = 1\).</li>
+  <li>\(\{g_1 = 1\} \cap \{g_2 = 1\} = \{(1,1)\}\). Then \(-1 - 2\tilde v_1 = 1\) and \(-1 + 2\tilde v_2 = 1\), that is, \(\tilde v_1 = -1\) and \(\tilde v_2 = 1\).</li>
+</ul>
+<p>In both possible cases the condition \(\tilde v_1 = -1 &lt; 1 = \tilde v_2\) is satisfied, and the four waves involved do exist, by the converse of the Corollary (Lemmas 3 and 3′). Therefore (II) has <em>exactly</em> two terraces connecting \(g_-\) to \(g_+\):</p>
+\[
+\begin{aligned}
+\text{Terrace A:}&\quad (1,-1) \xrightarrow{\;W_1\;} (1,1) \xrightarrow{\;W_2\;} (-1,1),\\[4pt]
+\text{Terrace B:}&\quad (1,-1) \xrightarrow{\;W_1\;} (-1,-1) \xrightarrow{\;W_2\;} (-1,1),
+\end{aligned}
+\]
+<p>both with \(\tilde v_1 = -1\) and \(\tilde v_2 = 1\). By Step 0, this proves the Theorem: in the original variables the speeds are \(v_1 = -\tfrac12\) and \(v_2 = \tfrac12\), and the intermediate states are \(c_0 = \pm\bigl(\tfrac{\sqrt2}{2}, -\tfrac{\sqrt2}{2}\bigr)\). <span class="qed"></span></p>
+<div class="clear"></div>
+
+<div class="env obs">
+<p class="env-title">Remark <span class="sub">(the explicit profiles)</span></p>
+<p>Lemmas 3 and 3′ give the profiles in closed form. In Terrace A, the wave \(W_1\) lives in the plane \(h_1 = 0\) with \(g_1 \equiv 1\) and \(g_2\) increasing from \(-1\) to \(1\): \(g_2(\xi) = \tanh(\xi/2)\), \(\tilde v_1 = -1\); the wave \(W_2\) lives in the plane \(h_2 = 0\) with \(g_2 \equiv 1\) and \(g_1\) decreasing from \(1\) to \(-1\): \(g_1(\xi) = -\tanh(\xi/2)\), \(\tilde v_2 = 1\). Going back to the original variables (\(\xi = \tilde y - \tilde v \tilde t = y/2 - \tilde v\, t/4\)),
+\[
+W_1:\; g_2 = \tanh\!\Bigl(\frac{2y + t}{8}\Bigr),\ g_1 \equiv 1;
+\qquad
+W_2:\; g_1 = -\tanh\!\Bigl(\frac{2y - t}{8}\Bigr),\ g_2 \equiv 1,
+\]
+and \(c\) is obtained by the inverse transformation of Section 3. Figure 6 (and, schematically, Figure 5) was drawn from these formulas; Terrace B is obtained by swapping the roles of the tubes, \(c_1 \leftrightarrow c_2\).</p>
+</div>
+</section>
+
+<!-- ============================ 8. CONCLUSION ============================ -->
+<section id="conclusion">
+<h2><span class="num">8</span>Conclusion and outlook</h2>
+<p>Comparing this original result with the study of <a href="#references">[1]</a>, we conclude that changing the transverse flow model directly affects the phenomenon: <strong>the growth rate of the mixing zone effectively doubles</strong>.</p>
+<table class="cmp">
+  <thead>
+    <tr><th>Transverse flow model</th><th>Wave speeds</th><th>Intermediate states \((c_1,c_2)\)</th><th>Mixing zone growth</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><em>Upwind</em> — Petrova, Tikhomirov, Efendiev <a href="#references">[1]</a></td><td>\(v_1 = -\tfrac14,\; v_2 = \tfrac14\)</td><td>\(\pm\bigl(\tfrac12, -\tfrac12\bigr)\)</td><td>\((v_2 - v_1)\,t = \tfrac12\,t\)</td></tr>
+    <tr class="hl"><td><em>Lax–Friedrichs</em> — this work</td><td>\(v_1 = -\tfrac12,\; v_2 = \tfrac12\)</td><td>\(\pm\bigl(\tfrac{\sqrt2}{2}, -\tfrac{\sqrt2}{2}\bigr)\)</td><td>\((v_2 - v_1)\,t = t\)</td></tr>
+  </tbody>
+</table>
+<p class="small">In both models the terraces connect the same states \((-1,-1)\) and \((1,1)\) and have the same structure (two waves, one intermediate plateau); what changes with the transverse flow model are the speeds and the values of the plateau.</p>
+<h3>Future research directions</h3>
+<p>The result of this page is a first step: it completely describes the two-wave terraces in the two-tube model with Lax–Friedrichs transverse flow. Several natural questions remain open.</p>
+<ul class="plain">
+  <li><b>Systems with \(n &gt; 2\) tubes.</b> The model of Section 3 is written for \(n\) tubes, but the Theorem deals only with \(n = 2\). With more tubes, system (I) has \(n\) components, the matrix of the transport term gets larger and the change of variables that diagonalizes it is no longer so simple. The question is whether terraces connecting \((-1,\dots,-1)\) to \((1,\dots,1)\) still exist, with which speeds and which intermediate states — and, above all, how the growth rate of the mixing zone depends on \(n\).</li>
+  <li><b>Terraces of \(N &gt; 2\) traveling waves.</b> With two tubes, the terrace has exactly two waves and one plateau. With more tubes, the transition between the two states is expected to decompose into a longer sequence of traveling waves, with several intermediate plateaus and ordered speeds \(v_1 &lt; v_2 &lt; \dots &lt; v_N\). Understanding the structure of these terraces — how many there are, which states form them and in which order the waves appear — is the direct generalization of Definition II and of the Theorem.</li>
+  <li><b>Asymptotic stability of the solutions.</b> The Theorem describes the special terrace-type solutions, but does not say whether they are actually reached by the dynamics: given an initial condition connecting \((-1,-1)\) to \((1,1)\), does the solution of the PDE (I) approach the terrace as \(t \to \infty\)? The simulation of Section 6 suggests so, at least for initial conditions like the ones used there, but turning this evidence into a proof requires studying the asymptotic stability of these solutions, which involves the linearization of (I) around the terrace and the behaviour of perturbations in time.</li>
+  <li><b>Deeper study of the Burgers equation.</b> The reduction of the system to the coupled Burgers equations (II) suggests exploring more thoroughly what is known about the viscous Burgers equation — the Cole–Hopf transformation, the explicit solutions, the stability of its viscous shocks — and investigating how much of this theory survives the coupling between the two equations. This is the natural path both to construct more general solutions and to attack the stability question above.</li>
+</ul>
+</section>
+
+<!-- ============================ 9. REFERENCES ============================ -->
+<section id="references">
+<h2><span class="num">9</span>References</h2>
+<p class="ref">[1] Petrova, Y.; Tikhomirov, S.; Efendiev, Y. <em>Propagating Terrace in a Two-Tubes Model of Gravitational Fingering.</em> SIAM Journal on Mathematical Analysis, v. 57, n. 1, p. 30–64, 2025.</p>
+<p class="ref">[2] Robinson, C. <em>An Introduction to Dynamical Systems: Continuous and Discrete.</em> 2nd ed. Providence: American Mathematical Society, 2012.</p>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <div class="inner">
+    <p>Supported by the University of São Paulo through the Programa Unificado de Bolsas (PUB) and by FAPESP (grant no. 2026/27402-1).<br>
+    Institute of Mathematics, Statistics and Computer Science, University of São Paulo (IME-USP).</p>
+    <p>Poster presented at the 34th SIICUSP (International Stage). This page is companion material to the poster. <a href="index.html" hreflang="pt-BR" lang="pt-BR" data-lang="pt">Versão em português</a>.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+const NAVY="#16325c", NAVY2="#1f4a86", GOLD="#e0a93a", GOLDD="#a87a1e", MUTED="#5b6673", LIGHT="#f4efe4";
+const SQ2=Math.SQRT2/2, K=3+2*Math.SQRT2;
+const SVGNS="http://www.w3.org/2000/svg";
+
+/* ---------- textos gerados por JS, nos dois idiomas ---------- */
+const I18N={
+  pt:{waveNow:"W(y − vt), instante t", waveLater:"instante t + Δt",
+      terraceWidth:"largura ≈ (v₂ − v₁)·t",
+      terraceNote:"v₁ < v₂: as ondas se afastam e o patamar em c₀ cresce (tracejado: instante posterior)",
+      concentration:"concentração", legend1:"c₁ (tubo 1)", legend2:"c₂ (tubo 2)", mixingZone:"zona de mistura",
+      pause:"Pausar", play:"Reproduzir",
+      readout:(t,w,v1,v2)=>`t = <b>${t}</b> &nbsp;·&nbsp; largura da zona ≈ <b>${w}</b> &nbsp;·&nbsp; v₁ ≈ <b>${v1}</b>, v₂ ≈ <b>${v2}</b> (teoria: −0,5 e 0,5)`},
+  en:{waveNow:"W(y − vt), time t", waveLater:"time t + Δt",
+      terraceWidth:"width ≈ (v₂ − v₁)·t",
+      terraceNote:"v₁ < v₂: the waves move apart and the plateau at c₀ widens (dashed: later time)",
+      concentration:"concentration", legend1:"c₁ (tube 1)", legend2:"c₂ (tube 2)", mixingZone:"mixing zone",
+      pause:"Pause", play:"Play",
+      readout:(t,w,v1,v2)=>`t = <b>${t}</b> &nbsp;·&nbsp; zone width ≈ <b>${w}</b> &nbsp;·&nbsp; v₁ ≈ <b>${v1}</b>, v₂ ≈ <b>${v2}</b> (theory: −0.5 and 0.5)`}
+};
+const LANG=(document.documentElement.lang||"pt").slice(0,2).toLowerCase();
+const T=I18N[LANG]||I18N.pt;
+/* ids das seções, na mesma ordem, para o seletor de idioma manter a seção atual */
+const SECTION_IDS={
+  pt:["poster","motivacao","semidiscretizacao","modelo","definicoes","resultado","animacao","demonstracao","conclusao","referencias"],
+  en:["poster","motivation","semidiscretization","model","definitions","result","animation","proof","conclusion","references"]
+};
+
+/* ---------- utilidades SVG ---------- */
+function el(tag, attrs, parent){
+  const e=document.createElementNS(SVGNS, tag);
+  for(const k in attrs) e.setAttribute(k, attrs[k]);
+  if(parent) parent.appendChild(e);
+  return e;
+}
+function txt(parent, x, y, s, attrs){
+  const t=el("text", Object.assign({x:x, y:y, "font-size":13, fill:NAVY}, attrs||{}), parent);
+  t.textContent=s; return t;
+}
+function pathFrom(xs, ys){
+  let d="";
+  for(let i=0;i<xs.length;i++) d+=(i?" L":"M")+xs[i].toFixed(1)+","+ys[i].toFixed(1);
+  return d;
+}
+function ensureMarkers(svg){
+  const defs=el("defs",{},svg);
+  const m=el("marker",{id:"m-navy",viewBox:"0 0 10 10",refX:9,refY:5,markerWidth:7,markerHeight:7,orient:"auto-start-reverse"},defs);
+  el("path",{d:"M0,0 L10,5 L0,10 z",fill:NAVY},m);
+  const g=el("marker",{id:"m-gold",viewBox:"0 0 10 10",refX:9,refY:5,markerWidth:7,markerHeight:7,orient:"auto-start-reverse"},defs);
+  el("path",{d:"M0,0 L10,5 L0,10 z",fill:GOLDD},g);
+}
+
+/* ---------- Figura 3: onda viajante ---------- */
+function buildWave(){
+  const svg=document.getElementById("figWave"); if(!svg) return;
+  ensureMarkers(svg);
+  const x0=40,x1=420,yTop=55,yBot=165;
+  const X=xi=>x0+(xi+8)/16*(x1-x0), Y=w=>yBot-(w+1)/2*(yBot-yTop);
+  // eixos e níveis
+  el("line",{x1:x0,y1:yBot+18,x2:x1+10,y2:yBot+18,stroke:MUTED,"stroke-width":1.3,"marker-end":"url(#m-navy)"},svg);
+  txt(svg,x1+14,yBot+23,"y",{fill:MUTED,class:"it","font-size":14});
+  el("line",{x1:x0,y1:Y(-1),x2:x1,y2:Y(-1),stroke:MUTED,"stroke-dasharray":"4 4","stroke-width":1},svg);
+  el("line",{x1:x0,y1:Y(1),x2:x1,y2:Y(1),stroke:MUTED,"stroke-dasharray":"4 4","stroke-width":1},svg);
+  txt(svg,x0-6,Y(-1)+5,"f₋",{"text-anchor":"end",class:"it","font-size":15});
+  txt(svg,x0-6,Y(1)+5,"f₊",{"text-anchor":"end",class:"it","font-size":15});
+  // perfis
+  const xs=[],ys=[],xs2=[],ys2=[];
+  for(let xi=-8;xi<=8.001;xi+=0.1){ xs.push(X(xi)); ys.push(Y(Math.tanh(xi-1.5))); if(xi+3<=8){xs2.push(X(xi+3)); ys2.push(Y(Math.tanh(xi-1.5)));} }
+  el("path",{d:pathFrom(xs2,ys2),fill:"none",stroke:NAVY2,"stroke-width":2.2,"stroke-dasharray":"6 4",opacity:.7},svg);
+  el("path",{d:pathFrom(xs,ys),fill:"none",stroke:NAVY,"stroke-width":2.8},svg);
+  // seta de velocidade
+  el("line",{x1:X(1.5)+8,y1:Y(0),x2:X(4.5)-8,y2:Y(0),stroke:GOLDD,"stroke-width":2.4,"marker-end":"url(#m-gold)"},svg);
+  txt(svg,(X(1.5)+X(4.5))/2,Y(0)-10,"v",{fill:GOLDD,class:"it","text-anchor":"middle","font-size":15});
+  txt(svg,X(-4.2),Y(0.35),T.waveNow,{"font-size":12,"text-anchor":"middle"});
+  txt(svg,X(6.2),Y(-0.6),T.waveLater,{"font-size":12,fill:NAVY2,"text-anchor":"middle"});
+}
+
+/* ---------- Figura 4: terraço ---------- */
+function buildTerrace(){
+  const svg=document.getElementById("figTerrace"); if(!svg) return;
+  ensureMarkers(svg);
+  const x0=40,x1=440,yTop=40,yBot=170, c0=0.3;
+  const X=y=>x0+(y+10)/20*(x1-x0), Y=c=>yBot-(c+1)/2*(yBot-yTop);
+  el("line",{x1:x0,y1:yBot+22,x2:x1+10,y2:yBot+22,stroke:MUTED,"stroke-width":1.3,"marker-end":"url(#m-navy)"},svg);
+  txt(svg,x1+14,yBot+27,"y",{fill:MUTED,class:"it","font-size":14});
+  [[-1,"c₋"],[c0,"c₀"],[1,"c₊"]].forEach(([c,l])=>{
+    el("line",{x1:x0,y1:Y(c),x2:x1,y2:Y(c),stroke:MUTED,"stroke-dasharray":"4 4","stroke-width":1},svg);
+    txt(svg,x0-6,Y(c)+5,l,{"text-anchor":"end",class:"it","font-size":15});
+  });
+  function prof(t){
+    const w1=-2.2-0.55*t, w2=2.2+0.55*t, xs=[],ys=[];
+    for(let y=-10;y<=10.001;y+=0.05){
+      const c=-1+(1+c0)*0.5*(1+Math.tanh((y-w1)*1.6))+(1-c0)*0.5*(1+Math.tanh((y-w2)*1.6));
+      xs.push(X(y)); ys.push(Y(c));
+    }
+    return pathFrom(xs,ys);
+  }
+  el("path",{d:prof(5),fill:"none",stroke:NAVY2,"stroke-width":2.2,"stroke-dasharray":"6 4",opacity:.7},svg);
+  el("path",{d:prof(0),fill:"none",stroke:NAVY,"stroke-width":2.8},svg);
+  // setas de velocidade (v1 para a esquerda, v2 para a direita)
+  el("line",{x1:X(-2.9),y1:Y(-0.45),x2:X(-4.4),y2:Y(-0.45),stroke:GOLDD,"stroke-width":2.4,"marker-end":"url(#m-gold)"},svg);
+  txt(svg,X(-3.65),Y(-0.45)-8,"v₁",{fill:GOLDD,class:"it","text-anchor":"middle","font-size":15});
+  el("line",{x1:X(2.9),y1:Y(0.6),x2:X(4.4),y2:Y(0.6),stroke:GOLDD,"stroke-width":2.4,"marker-end":"url(#m-gold)"},svg);
+  txt(svg,X(3.65),Y(0.6)+18,"v₂",{fill:GOLDD,class:"it","text-anchor":"middle","font-size":15});
+  txt(svg,X(-0.9),Y(-0.62)+5,"W₁",{"font-size":14,class:"it"});
+  txt(svg,X(1.0),Y(0.78)+5,"W₂",{"text-anchor":"end","font-size":14,class:"it"});
+  // largura do patamar (abaixo do patamar, entre as duas ondas)
+  el("line",{x1:X(-2.0),y1:Y(c0)+18,x2:X(2.0),y2:Y(c0)+18,stroke:NAVY,"stroke-width":1.4,"marker-start":"url(#m-navy)","marker-end":"url(#m-navy)"},svg);
+  txt(svg,X(0),Y(c0)+40,T.terraceWidth,{"text-anchor":"middle","font-size":12});
+  txt(svg,X(0),yBot+50,T.terraceNote,{"text-anchor":"middle","font-size":12,fill:MUTED});
+}
+
+/* ---------- transformação inversa g -> c ---------- */
+function gToC(g1,g2){ return [(K*g2-g1)/(K+1), (g2-K*g1)/(K+1)]; }
+function exactTerraceA(y,t){ // perfis explícitos (Observação da Seção 7)
+  const g1=-Math.tanh((2*y-t)/8), g2=Math.tanh((2*y+t)/8);
+  return gToC(g1,g2);
+}
+
+/* ---------- Figura 6: perfis exatos em t = 100 ---------- */
+function buildProfiles(){
+  const svg=document.getElementById("figProfiles"); if(!svg) return;
+  const x0=52,x1=424,yTop=28,yBot=268;
+  const X=y=>x0+(y+100)/200*(x1-x0), Y=c=>yBot-(c+1.1)/2.2*(yBot-yTop);
+  // grade
+  [[-1,"−1"],[-SQ2,"−√2/2"],[0,"0"],[SQ2,"√2/2"],[1,"1"]].forEach(([c,l])=>{
+    el("line",{x1:x0,y1:Y(c),x2:x1,y2:Y(c),stroke:"#d9dde6","stroke-width":1,"stroke-dasharray":(Math.abs(Math.abs(c)-SQ2)<1e-9?"5 4":"none")},svg);
+    txt(svg,x0-6,Y(c)+4,l,{"text-anchor":"end","font-size":12,fill:MUTED});
+  });
+  [-100,-50,0,50,100].forEach(y=>{
+    el("line",{x1:X(y),y1:yTop,x2:X(y),y2:yBot,stroke:"#eceef3","stroke-width":1},svg);
+    txt(svg,X(y),yBot+16,String(y),{"text-anchor":"middle","font-size":12,fill:MUTED});
+  });
+  el("rect",{x:x0,y:yTop,width:x1-x0,height:yBot-yTop,fill:"none",stroke:MUTED,"stroke-width":1},svg);
+  txt(svg,(x0+x1)/2,yBot+34,"y",{"text-anchor":"middle","font-size":14,fill:MUTED,class:"it"});
+  const xs=[],y1s=[],y2s=[];
+  for(let y=-100;y<=100.001;y+=0.5){ const c=exactTerraceA(y,100); xs.push(X(y)); y1s.push(Y(c[0])); y2s.push(Y(c[1])); }
+  el("path",{d:pathFrom(xs,y2s),fill:"none",stroke:GOLD,"stroke-width":2.6},svg);
+  el("path",{d:pathFrom(xs,y1s),fill:"none",stroke:NAVY,"stroke-width":2.6},svg);
+  txt(svg,X(0),Y(SQ2)-8,"c₁ = √2/2",{"text-anchor":"middle","font-size":12,class:"it"});
+  txt(svg,X(0),Y(-SQ2)+16,"c₂ = −√2/2",{"text-anchor":"middle","font-size":12,class:"it",fill:GOLDD});
+  // legenda
+  el("rect",{x:x0+8,y:yTop+8,width:64,height:36,fill:"#fff",stroke:"#d9dde6"},svg);
+  el("line",{x1:x0+14,y1:yTop+20,x2:x0+34,y2:yTop+20,stroke:NAVY,"stroke-width":2.6},svg); txt(svg,x0+40,yTop+24,"c₁",{"font-size":12,class:"it"});
+  el("line",{x1:x0+14,y1:yTop+34,x2:x0+34,y2:yTop+34,stroke:GOLD,"stroke-width":2.6},svg); txt(svg,x0+40,yTop+38,"c₂",{"font-size":12,class:"it",fill:GOLDD});
+  txt(svg,x1,yTop-8,"t = 100",{"text-anchor":"end","font-size":12,fill:MUTED});
+}
+
+/* ---------- Simulação numérica do sistema (I) ---------- */
+function setupSim(){
+  const canvas=document.getElementById("simCanvas"); if(!canvas) return;
+  const ctx=canvas.getContext("2d");
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  // geometria do desenho (dois tamanhos lógicos: largo e estreito/celular)
+  let W,H,top,bot,tubeX,tubeW,px0,px1;
+  function layout(){
+    const narrow=(canvas.parentElement.clientWidth||800)<620;
+    if(narrow){ W=520;H=600;top=44;bot=556;tubeX=[52,98];tubeW=36;px0=206;px1=500; }
+    else      { W=880;H=520;top=44;bot=486;tubeX=[64,126];tubeW=44;px0=272;px1=846; }
+    canvas.width=W*dpr; canvas.height=H*dpr; canvas.style.aspectRatio=W+" / "+H;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  layout();
+  let resizeTimer=null;
+  window.addEventListener("resize",()=>{ clearTimeout(resizeTimer); resizeTimer=setTimeout(layout,150); });
+
+  const L=150, dy=0.5, N=Math.round(2*L/dy)+1, dt=0.1, A0=8;
+  const y=new Float64Array(N); for(let i=0;i<N;i++) y[i]=-L+i*dy;
+  let c1=new Float64Array(N), c2=new Float64Array(N), n1=new Float64Array(N), n2=new Float64Array(N);
+  let t=0, variant="A", running=true, speed=2, hist=[];
+  const reduced=window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduced) running=false;
+
+  function reset(){
+    for(let i=0;i<N;i++){
+      const a=Math.tanh((y[i]+A0)/2), b=Math.tanh((y[i]-A0)/2);
+      if(variant==="A"){c1[i]=a;c2[i]=b;} else {c1[i]=b;c2[i]=a;}
+    }
+    t=0; hist=[];
+  }
+  function step(){
+    const r=1/(dy*dy), h2=1/(2*dy);
+    for(let i=1;i<N-1;i++){
+      const d=(c1[i]-c2[i])/4;
+      const c1y=(c1[i+1]-c1[i-1])*h2, c2y=(c2[i+1]-c2[i-1])*h2;
+      const c1yy=(c1[i+1]-2*c1[i]+c1[i-1])*r, c2yy=(c2[i+1]-2*c2[i]+c2[i-1])*r;
+      n1[i]=c1[i]+dt*(c1yy-d*(-3*c1y+c2y));
+      n2[i]=c2[i]+dt*(c2yy-d*(-c1y+3*c2y));
+    }
+    n1[0]=-1;n2[0]=-1;n1[N-1]=1;n2[N-1]=1;
+    let tmp=c1;c1=n1;n1=tmp; tmp=c2;c2=n2;n2=tmp;
+    t+=dt;
+  }
+  // posições das frentes: no tubo "à frente" (patamar +√2/2), cruzamentos dos níveis intermediários
+  function crossing(arr,level){
+    for(let i=0;i<N-1;i++){ if(arr[i]<level && arr[i+1]>=level){ const s=(level-arr[i])/(arr[i+1]-arr[i]); return y[i]+s*dy; } }
+    return NaN;
+  }
+  function fronts(){
+    const arr=(variant==="A")?c1:c2;
+    return [crossing(arr,(-1+SQ2)/2), crossing(arr,(SQ2+1)/2)];
+  }
+
+  const Ypix=yy=>top+(L-yy)/(2*L)*(bot-top);
+  const Xpix=c=>px0+(c+1.15)/2.3*(px1-px0);
+  function colorOf(c){ // mesma escala da Figura 1: -1 dourado, 0 creme, 1 azul
+    const v=Math.max(-1,Math.min(1,c));
+    const cream=[244,239,228], navy=[22,50,92], gold=[224,169,58];
+    const b=v>=0?navy:gold, t=Math.abs(v);
+    return `rgb(${Math.round(cream[0]+(b[0]-cream[0])*t)},${Math.round(cream[1]+(b[1]-cream[1])*t)},${Math.round(cream[2]+(b[2]-cream[2])*t)})`;
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    ctx.font="600 15px 'Source Sans 3', sans-serif"; ctx.fillStyle=NAVY; ctx.textAlign="center";
+    ctx.fillText("c₁",tubeX[0]+tubeW/2,30); ctx.fillText("c₂",tubeX[1]+tubeW/2,30);
+    // tubos
+    const rows=Math.round((bot-top));
+    for(let k=0;k<2;k++){
+      const arr=k?c2:c1;
+      for(let p=0;p<rows;p++){
+        const yy=L-(p+0.5)/rows*2*L; const i=Math.max(0,Math.min(N-1,Math.round((yy+L)/dy)));
+        ctx.fillStyle=colorOf(arr[i]); ctx.fillRect(tubeX[k],top+p,tubeW,1.2);
+      }
+      ctx.strokeStyle=NAVY; ctx.lineWidth=2; ctx.strokeRect(tubeX[k],top,tubeW,bot-top);
+    }
+    // eixo y (ticks à esquerda dos tubos)
+    ctx.fillStyle=MUTED; ctx.font="12px 'Source Sans 3', sans-serif"; ctx.textAlign="right";
+    [-150,-100,-50,0,50,100,150].forEach(v=>{ ctx.fillText(String(v),tubeX[0]-8,Ypix(v)+4); });
+    ctx.save(); ctx.translate(16,(top+bot)/2); ctx.rotate(-Math.PI/2); ctx.textAlign="center"; ctx.font="italic 14px 'Source Serif 4', serif"; ctx.fillText("y",0,0); ctx.restore();
+    // área do gráfico
+    ctx.fillStyle="#fff"; ctx.fillRect(px0,top,px1-px0,bot-top);
+    ctx.strokeStyle="#d9dde6"; ctx.lineWidth=1;
+    [[-1,"−1"],[-SQ2,"−√2/2"],[0,"0"],[SQ2,"√2/2"],[1,"1"]].forEach(([c,l])=>{
+      ctx.beginPath(); ctx.setLineDash(Math.abs(Math.abs(c)-SQ2)<1e-9?[5,4]:[]); ctx.strokeStyle=Math.abs(Math.abs(c)-SQ2)<1e-9?GOLDD:"#d9dde6";
+      ctx.moveTo(Xpix(c),top); ctx.lineTo(Xpix(c),bot); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle=MUTED; ctx.textAlign="center"; ctx.font="12px 'Source Sans 3', sans-serif"; ctx.fillText(l,Xpix(c),bot+16);
+    });
+    ctx.strokeStyle=MUTED; ctx.strokeRect(px0,top,px1-px0,bot-top);
+    ctx.fillStyle=MUTED; ctx.textAlign="center"; ctx.font="12px 'Source Sans 3', sans-serif"; ctx.fillText(T.concentration,(px0+px1)/2,bot+32);
+    // frentes
+    const [y1,y2]=fronts();
+    ctx.setLineDash([6,5]); ctx.lineWidth=1.4; ctx.strokeStyle=GOLDD;
+    [[y1,"W₁"],[y2,"W₂"]].forEach(([yy,l])=>{
+      if(!isFinite(yy)) return;
+      ctx.beginPath(); ctx.moveTo(tubeX[0]-2,Ypix(yy)); ctx.lineTo(px1,Ypix(yy)); ctx.stroke();
+      ctx.fillStyle=GOLDD; ctx.textAlign="left"; ctx.font="600 13px 'Source Sans 3', sans-serif"; ctx.fillText(l,px0+6,Ypix(yy)+(l==="W₁"?16:-6));
+    });
+    ctx.setLineDash([]);
+    // curvas
+    function curve(arr,color){
+      ctx.beginPath(); ctx.strokeStyle=color; ctx.lineWidth=2.6;
+      for(let i=0;i<N;i++){ const X=Xpix(arr[i]), Y=Ypix(y[i]); if(i)ctx.lineTo(X,Y); else ctx.moveTo(X,Y); }
+      ctx.stroke();
+    }
+    curve(c2,GOLD); curve(c1,NAVY);
+    // legenda
+    ctx.font="600 13px 'Source Sans 3', sans-serif"; ctx.textAlign="left";
+    const ly=bot-56;
+    ctx.fillStyle="#fff"; ctx.fillRect(px1-110,ly,100,44); ctx.strokeStyle="#d9dde6"; ctx.strokeRect(px1-110,ly,100,44);
+    ctx.strokeStyle=NAVY; ctx.lineWidth=2.6; ctx.beginPath(); ctx.moveTo(px1-102,ly+14); ctx.lineTo(px1-80,ly+14); ctx.stroke(); ctx.fillStyle=NAVY; ctx.fillText(T.legend1,px1-74,ly+18);
+    ctx.strokeStyle=GOLD; ctx.beginPath(); ctx.moveTo(px1-102,ly+32); ctx.lineTo(px1-80,ly+32); ctx.stroke(); ctx.fillStyle=GOLDD; ctx.fillText(T.legend2,px1-74,ly+36);
+    // zona de mistura (chave entre as frentes, à direita dos tubos)
+    if(isFinite(y1)&&isFinite(y2)){
+      const xa=tubeX[1]+tubeW+10, ya=Ypix(y2), yb=Ypix(y1);
+      ctx.strokeStyle=NAVY; ctx.lineWidth=1.4; ctx.beginPath(); ctx.moveTo(xa,ya); ctx.lineTo(xa+8,ya); ctx.lineTo(xa+8,yb); ctx.lineTo(xa,yb); ctx.stroke();
+      ctx.save(); ctx.translate(xa+22,(ya+yb)/2); ctx.rotate(-Math.PI/2); ctx.textAlign="center"; ctx.fillStyle=NAVY; ctx.font="600 12px 'Source Sans 3', sans-serif";
+      if(yb-ya>70) ctx.fillText(T.mixingZone,0,0); ctx.restore();
+    }
+    // leitura
+    const ro=document.getElementById("readout");
+    if(ro){
+      let v1="—",v2="—";
+      if(hist.length>=2){ const a=hist[0], b=hist[hist.length-1]; if(b.t-a.t>5){ v1=((b.y1-a.y1)/(b.t-a.t)).toFixed(2); v2=((b.y2-a.y2)/(b.t-a.t)).toFixed(2);} }
+      const w=(isFinite(y1)&&isFinite(y2))?(y2-y1).toFixed(1):"—";
+      ro.innerHTML=T.readout(t.toFixed(1),w,v1,v2);
+    }
+  }
+  function frame(){
+    if(running){
+      const steps=3*speed;
+      for(let s=0;s<steps;s++) step();
+      const [y1,y2]=fronts();
+      if(isFinite(y1)&&isFinite(y2)){ hist.push({t:t,y1:y1,y2:y2}); while(hist.length && t-hist[0].t>25) hist.shift(); }
+      if(t>=250) reset();
+    }
+    draw();
+    requestAnimationFrame(frame);
+  }
+  const btnPlay=document.getElementById("btnPlay"), btnReset=document.getElementById("btnReset"),
+        selV=document.getElementById("selVariant"), selS=document.getElementById("selSpeed");
+  function syncBtn(){ btnPlay.textContent=running?T.pause:T.play; }
+  btnPlay.addEventListener("click",()=>{running=!running; syncBtn();});
+  btnReset.addEventListener("click",()=>{reset();});
+  selV.addEventListener("change",()=>{variant=selV.value; reset();});
+  selS.addEventListener("change",()=>{speed=parseInt(selS.value,10);});
+  reset(); syncBtn(); requestAnimationFrame(frame);
+}
+
+/* ---------- sumário ativo ---------- */
+function setupToc(){
+  const links=Array.from(document.querySelectorAll("nav.toc a"));
+  if(!links.length) return;
+  const secs=links.map(a=>document.getElementById(a.getAttribute("href").slice(1))).filter(Boolean);
+  let ticking=false;
+  function update(){
+    ticking=false;
+    const pos=window.scrollY+140; let cur=-1;
+    for(let i=0;i<secs.length;i++){ if(secs[i].offsetTop<=pos) cur=i; }
+    links.forEach((a,i)=>a.classList.toggle("active",i===cur));
+  }
+  window.addEventListener("scroll",()=>{ if(!ticking){ ticking=true; requestAnimationFrame(update); } },{passive:true});
+  window.addEventListener("resize",update);
+  update();
+}
+
+/* ---------- seletor de idioma ---------- */
+function setupLang(){
+  document.querySelectorAll("a[data-lang]").forEach(a=>{
+    a.addEventListener("click",()=>{
+      const to=a.dataset.lang;
+      try{ localStorage.setItem("siicusp-lang",to); }catch(e){}
+      if(to===LANG || !SECTION_IDS[to]) return;
+      // mantém a seção atual ao trocar de idioma
+      const i=SECTION_IDS[LANG].indexOf(location.hash.slice(1));
+      if(i>=0) a.href=a.getAttribute("href").split("#")[0]+"#"+SECTION_IDS[to][i];
+    });
+  });
+}
+
+/* ---------- KaTeX ---------- */
+function renderMath(){
+  if(typeof renderMathInElement!=="function") return;
+  renderMathInElement(document.body,{
+    delimiters:[{left:"\\[",right:"\\]",display:true},{left:"\\(",right:"\\)",display:false},{left:"$$",right:"$$",display:true}],
+    throwOnError:false, trust:false, strict:"ignore"
+  });
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+  buildWave(); buildTerrace(); buildProfiles(); setupSim(); setupToc(); setupLang();
+  renderMath();
+  // se o KaTeX ainda não carregou (rede lenta), tenta de novo quando a página terminar de carregar
+  window.addEventListener("load",renderMath);
+});
+})();
+</script>
+</body>
+</html>

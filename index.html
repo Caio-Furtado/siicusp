@@ -5,6 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Modelos semidiscretos para gravitational fingering no regime TFE</title>
 <meta name="description" content="Página de apoio ao pôster apresentado no 34º SIICUSP: modelo semidiscreto de dois tubos para gravitational fingering no regime TFE, terraços de propagação e demonstração completa do resultado principal.">
+<link rel="alternate" hreflang="pt-BR" href="https://caio-furtado.github.io/siicusp/">
+<link rel="alternate" hreflang="en" href="https://caio-furtado.github.io/siicusp/en.html">
+<link rel="alternate" hreflang="x-default" href="https://caio-furtado.github.io/siicusp/">
+<script>
+/* Primeira visita com navegador em outro idioma que não português: vai para a versão em inglês.
+   Clicar em PT-BR/EN guarda a escolha (localStorage) e desativa este redirecionamento.
+   Para remover o redirecionamento automático, basta apagar este bloco <script>. */
+(function(){try{
+  if(localStorage.getItem('siicusp-lang')) return;
+  var l=((navigator.languages&&navigator.languages[0])||navigator.language||'').toLowerCase();
+  if(!l||l.indexOf('pt')===0) return;
+  var pt=['poster','motivacao','semidiscretizacao','modelo','definicoes','resultado','animacao','demonstracao','conclusao','referencias'],
+      en=['poster','motivation','semidiscretization','model','definitions','result','animation','proof','conclusion','references'];
+  var h=location.hash.slice(1), i=pt.indexOf(h);
+  location.replace('en.html'+(i>=0?'#'+en[i]:''));
+}catch(e){}})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
@@ -181,12 +198,29 @@ footer .inner{max-width:1040px; margin:0 auto}
   .fingerDown,.fingerUp,.lineUp,.lineDown,.lateLabel{animation:none}
   .fingerDown,.fingerUp{transform:scaleY(1)} .lineUp{transform:translateY(-78px)} .lineDown{transform:translateY(78px)}
 }
+
+/* ---------- seletor de idioma / language switch ---------- */
+.hero-inner{position:relative}
+.lang-switch{position:absolute; top:-6px; right:0; display:inline-flex; border:1.5px solid rgba(255,255,255,.55); border-radius:999px; overflow:hidden; font-family:var(--sans); font-size:.8rem; font-weight:600; letter-spacing:.08em}
+.lang-switch a{color:#fff; text-decoration:none; padding:5px 13px; line-height:1.2}
+.lang-switch a.active{background:var(--gold); color:#1c2430}
+.lang-switch a:not(.active):hover{background:rgba(255,255,255,.16); color:#fff}
+nav.toc .toc-lang{margin:16px 0 0; padding-left:12px; font-size:.88rem}
+nav.toc .toc-lang a{color:var(--muted); text-decoration:none}
+nav.toc .toc-lang a:hover{color:var(--navy)}
+@media (max-width:900px){
+  .lang-switch{position:static; display:flex; width:max-content; margin:0 0 16px}
+}
 </style>
 </head>
 <body>
 
 <header class="hero">
   <div class="hero-inner">
+    <div class="lang-switch" aria-label="Idioma / Language">
+      <a href="index.html" hreflang="pt-BR" lang="pt-BR" data-lang="pt" class="active" aria-current="page">PT-BR</a>
+      <a href="en.html" hreflang="en" lang="en" data-lang="en" title="English version">EN</a>
+    </div>
     <p class="kicker">34º SIICUSP · Iniciação Científica · IME-USP</p>
     <h1>Modelos semidiscretos para <em>gravitational fingering</em> no regime TFE</h1>
     <p class="authors"><b>Caio Alexandre Paoli Furtado</b> <span>·</span> caiofurtado@usp.br<br>
@@ -210,6 +244,7 @@ footer .inner{max-width:1040px; margin:0 auto}
     <li><a href="#conclusao"><span class="num">8</span>Conclusão e perspectivas</a></li>
     <li><a href="#referencias"><span class="num">9</span>Referências</a></li>
   </ol>
+  <p class="toc-lang"><a href="en.html" hreflang="en" lang="en" data-lang="en">English version &rarr;</a></p>
 </nav>
 
 <main>
@@ -809,7 +844,7 @@ e \(c\) obtém-se pela transformação inversa da Seção 3. A Figura 6 (e a Fig
   <div class="inner">
     <p>O aluno é bolsista do Programa Unificado de Bolsas (PUB), financiado pela Universidade de São Paulo.<br>
     Instituto de Matemática, Estatística e Ciência da Computação da Universidade de São Paulo (IME-USP).</p>
-    <p>Pôster apresentado no 34º SIICUSP. Esta página é material de apoio ao pôster.</p>
+    <p>Pôster apresentado no 34º SIICUSP. Esta página é material de apoio ao pôster. <a href="en.html" hreflang="en" lang="en" data-lang="en">English version</a>.</p>
   </div>
 </footer>
 
@@ -819,6 +854,29 @@ e \(c\) obtém-se pela transformação inversa da Seção 3. A Figura 6 (e a Fig
 const NAVY="#16325c", NAVY2="#1f4a86", GOLD="#e0a93a", GOLDD="#a87a1e", MUTED="#5b6673", LIGHT="#f4efe4";
 const SQ2=Math.SQRT2/2, K=3+2*Math.SQRT2;
 const SVGNS="http://www.w3.org/2000/svg";
+
+/* ---------- textos gerados por JS, nos dois idiomas ---------- */
+const I18N={
+  pt:{waveNow:"W(y − vt), instante t", waveLater:"instante t + Δt",
+      terraceWidth:"largura ≈ (v₂ − v₁)·t",
+      terraceNote:"v₁ < v₂: as ondas se afastam e o patamar em c₀ cresce (tracejado: instante posterior)",
+      concentration:"concentração", legend1:"c₁ (tubo 1)", legend2:"c₂ (tubo 2)", mixingZone:"zona de mistura",
+      pause:"Pausar", play:"Reproduzir",
+      readout:(t,w,v1,v2)=>`t = <b>${t}</b> &nbsp;·&nbsp; largura da zona ≈ <b>${w}</b> &nbsp;·&nbsp; v₁ ≈ <b>${v1}</b>, v₂ ≈ <b>${v2}</b> (teoria: −0,5 e 0,5)`},
+  en:{waveNow:"W(y − vt), time t", waveLater:"time t + Δt",
+      terraceWidth:"width ≈ (v₂ − v₁)·t",
+      terraceNote:"v₁ < v₂: the waves move apart and the plateau at c₀ widens (dashed: later time)",
+      concentration:"concentration", legend1:"c₁ (tube 1)", legend2:"c₂ (tube 2)", mixingZone:"mixing zone",
+      pause:"Pause", play:"Play",
+      readout:(t,w,v1,v2)=>`t = <b>${t}</b> &nbsp;·&nbsp; zone width ≈ <b>${w}</b> &nbsp;·&nbsp; v₁ ≈ <b>${v1}</b>, v₂ ≈ <b>${v2}</b> (theory: −0.5 and 0.5)`}
+};
+const LANG=(document.documentElement.lang||"pt").slice(0,2).toLowerCase();
+const T=I18N[LANG]||I18N.pt;
+/* ids das seções, na mesma ordem, para o seletor de idioma manter a seção atual */
+const SECTION_IDS={
+  pt:["poster","motivacao","semidiscretizacao","modelo","definicoes","resultado","animacao","demonstracao","conclusao","referencias"],
+  en:["poster","motivation","semidiscretization","model","definitions","result","animation","proof","conclusion","references"]
+};
 
 /* ---------- utilidades SVG ---------- */
 function el(tag, attrs, parent){
@@ -865,8 +923,8 @@ function buildWave(){
   // seta de velocidade
   el("line",{x1:X(1.5)+8,y1:Y(0),x2:X(4.5)-8,y2:Y(0),stroke:GOLDD,"stroke-width":2.4,"marker-end":"url(#m-gold)"},svg);
   txt(svg,(X(1.5)+X(4.5))/2,Y(0)-10,"v",{fill:GOLDD,class:"it","text-anchor":"middle","font-size":15});
-  txt(svg,X(-4.2),Y(0.35),"W(y − vt), instante t",{"font-size":12,"text-anchor":"middle"});
-  txt(svg,X(6.2),Y(-0.6),"instante t + Δt",{"font-size":12,fill:NAVY2,"text-anchor":"middle"});
+  txt(svg,X(-4.2),Y(0.35),T.waveNow,{"font-size":12,"text-anchor":"middle"});
+  txt(svg,X(6.2),Y(-0.6),T.waveLater,{"font-size":12,fill:NAVY2,"text-anchor":"middle"});
 }
 
 /* ---------- Figura 4: terraço ---------- */
@@ -900,8 +958,8 @@ function buildTerrace(){
   txt(svg,X(1.0),Y(0.78)+5,"W₂",{"text-anchor":"end","font-size":14,class:"it"});
   // largura do patamar (abaixo do patamar, entre as duas ondas)
   el("line",{x1:X(-2.0),y1:Y(c0)+18,x2:X(2.0),y2:Y(c0)+18,stroke:NAVY,"stroke-width":1.4,"marker-start":"url(#m-navy)","marker-end":"url(#m-navy)"},svg);
-  txt(svg,X(0),Y(c0)+40,"largura ≈ (v₂ − v₁)·t",{"text-anchor":"middle","font-size":12});
-  txt(svg,X(0),yBot+50,"v₁ < v₂: as ondas se afastam e o patamar em c₀ cresce (tracejado: instante posterior)",{"text-anchor":"middle","font-size":12,fill:MUTED});
+  txt(svg,X(0),Y(c0)+40,T.terraceWidth,{"text-anchor":"middle","font-size":12});
+  txt(svg,X(0),yBot+50,T.terraceNote,{"text-anchor":"middle","font-size":12,fill:MUTED});
 }
 
 /* ---------- transformação inversa g -> c ---------- */
@@ -1030,7 +1088,7 @@ function setupSim(){
       ctx.fillStyle=MUTED; ctx.textAlign="center"; ctx.font="12px 'Source Sans 3', sans-serif"; ctx.fillText(l,Xpix(c),bot+16);
     });
     ctx.strokeStyle=MUTED; ctx.strokeRect(px0,top,px1-px0,bot-top);
-    ctx.fillStyle=MUTED; ctx.textAlign="center"; ctx.font="12px 'Source Sans 3', sans-serif"; ctx.fillText("concentração",(px0+px1)/2,bot+32);
+    ctx.fillStyle=MUTED; ctx.textAlign="center"; ctx.font="12px 'Source Sans 3', sans-serif"; ctx.fillText(T.concentration,(px0+px1)/2,bot+32);
     // frentes
     const [y1,y2]=fronts();
     ctx.setLineDash([6,5]); ctx.lineWidth=1.4; ctx.strokeStyle=GOLDD;
@@ -1051,14 +1109,14 @@ function setupSim(){
     ctx.font="600 13px 'Source Sans 3', sans-serif"; ctx.textAlign="left";
     const ly=bot-56;
     ctx.fillStyle="#fff"; ctx.fillRect(px1-110,ly,100,44); ctx.strokeStyle="#d9dde6"; ctx.strokeRect(px1-110,ly,100,44);
-    ctx.strokeStyle=NAVY; ctx.lineWidth=2.6; ctx.beginPath(); ctx.moveTo(px1-102,ly+14); ctx.lineTo(px1-80,ly+14); ctx.stroke(); ctx.fillStyle=NAVY; ctx.fillText("c₁ (tubo 1)",px1-74,ly+18);
-    ctx.strokeStyle=GOLD; ctx.beginPath(); ctx.moveTo(px1-102,ly+32); ctx.lineTo(px1-80,ly+32); ctx.stroke(); ctx.fillStyle=GOLDD; ctx.fillText("c₂ (tubo 2)",px1-74,ly+36);
+    ctx.strokeStyle=NAVY; ctx.lineWidth=2.6; ctx.beginPath(); ctx.moveTo(px1-102,ly+14); ctx.lineTo(px1-80,ly+14); ctx.stroke(); ctx.fillStyle=NAVY; ctx.fillText(T.legend1,px1-74,ly+18);
+    ctx.strokeStyle=GOLD; ctx.beginPath(); ctx.moveTo(px1-102,ly+32); ctx.lineTo(px1-80,ly+32); ctx.stroke(); ctx.fillStyle=GOLDD; ctx.fillText(T.legend2,px1-74,ly+36);
     // zona de mistura (chave entre as frentes, à direita dos tubos)
     if(isFinite(y1)&&isFinite(y2)){
       const xa=tubeX[1]+tubeW+10, ya=Ypix(y2), yb=Ypix(y1);
       ctx.strokeStyle=NAVY; ctx.lineWidth=1.4; ctx.beginPath(); ctx.moveTo(xa,ya); ctx.lineTo(xa+8,ya); ctx.lineTo(xa+8,yb); ctx.lineTo(xa,yb); ctx.stroke();
       ctx.save(); ctx.translate(xa+22,(ya+yb)/2); ctx.rotate(-Math.PI/2); ctx.textAlign="center"; ctx.fillStyle=NAVY; ctx.font="600 12px 'Source Sans 3', sans-serif";
-      if(yb-ya>70) ctx.fillText("zona de mistura",0,0); ctx.restore();
+      if(yb-ya>70) ctx.fillText(T.mixingZone,0,0); ctx.restore();
     }
     // leitura
     const ro=document.getElementById("readout");
@@ -1066,7 +1124,7 @@ function setupSim(){
       let v1="—",v2="—";
       if(hist.length>=2){ const a=hist[0], b=hist[hist.length-1]; if(b.t-a.t>5){ v1=((b.y1-a.y1)/(b.t-a.t)).toFixed(2); v2=((b.y2-a.y2)/(b.t-a.t)).toFixed(2);} }
       const w=(isFinite(y1)&&isFinite(y2))?(y2-y1).toFixed(1):"—";
-      ro.innerHTML=`t = <b>${t.toFixed(1)}</b> &nbsp;·&nbsp; largura da zona ≈ <b>${w}</b> &nbsp;·&nbsp; v₁ ≈ <b>${v1}</b>, v₂ ≈ <b>${v2}</b> (teoria: −0,5 e 0,5)`;
+      ro.innerHTML=T.readout(t.toFixed(1),w,v1,v2);
     }
   }
   function frame(){
@@ -1082,7 +1140,7 @@ function setupSim(){
   }
   const btnPlay=document.getElementById("btnPlay"), btnReset=document.getElementById("btnReset"),
         selV=document.getElementById("selVariant"), selS=document.getElementById("selSpeed");
-  function syncBtn(){ btnPlay.textContent=running?"Pausar":"Reproduzir"; }
+  function syncBtn(){ btnPlay.textContent=running?T.pause:T.play; }
   btnPlay.addEventListener("click",()=>{running=!running; syncBtn();});
   btnReset.addEventListener("click",()=>{reset();});
   selV.addEventListener("change",()=>{variant=selV.value; reset();});
@@ -1107,6 +1165,20 @@ function setupToc(){
   update();
 }
 
+/* ---------- seletor de idioma ---------- */
+function setupLang(){
+  document.querySelectorAll("a[data-lang]").forEach(a=>{
+    a.addEventListener("click",()=>{
+      const to=a.dataset.lang;
+      try{ localStorage.setItem("siicusp-lang",to); }catch(e){}
+      if(to===LANG || !SECTION_IDS[to]) return;
+      // mantém a seção atual ao trocar de idioma
+      const i=SECTION_IDS[LANG].indexOf(location.hash.slice(1));
+      if(i>=0) a.href=a.getAttribute("href").split("#")[0]+"#"+SECTION_IDS[to][i];
+    });
+  });
+}
+
 /* ---------- KaTeX ---------- */
 function renderMath(){
   if(typeof renderMathInElement!=="function") return;
@@ -1117,7 +1189,7 @@ function renderMath(){
 }
 
 document.addEventListener("DOMContentLoaded",function(){
-  buildWave(); buildTerrace(); buildProfiles(); setupSim(); setupToc();
+  buildWave(); buildTerrace(); buildProfiles(); setupSim(); setupToc(); setupLang();
   renderMath();
   // se o KaTeX ainda não carregou (rede lenta), tenta de novo quando a página terminar de carregar
   window.addEventListener("load",renderMath);
